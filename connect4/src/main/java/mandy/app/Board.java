@@ -4,7 +4,7 @@ import static mandy.app.Result.*;
 
 public class Board {
 
-    private final Player[][] board = new Player[6][7];
+    private Player[][] board = new Player[6][7];
 
     public Board() {
     }
@@ -22,6 +22,10 @@ public class Board {
 
     public Player[][] getBoard() {
         return board;
+    }
+
+    public void setBoard(Player[][] newBoard) {
+        board = newBoard;
     }
 
     public void addStone(Player player, int x) {

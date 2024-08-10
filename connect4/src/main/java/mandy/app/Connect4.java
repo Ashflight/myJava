@@ -1,8 +1,7 @@
 package mandy.app;
 import java.util.Scanner;
 
-import static mandy.app.Player.O;
-import static mandy.app.Player.X;
+import static mandy.app.Player.*;
 import static mandy.app.Result.*;
 
 public class Connect4 {
@@ -23,14 +22,18 @@ public class Connect4 {
         board.printBoard();
     }
 
-    public void printResult(Result result, Player player) {
+    public String generateMessage(Result result, Player player) {
         if (result == WIN) {
-            System.out.printf("The game has ended, player %s won!", player);
+            return ("The game has ended, player " + player.toString() + " won!");
         }
         else if (result == TIE) {
-            System.out.println("The game has ended and it is a tie.");
+            return "The game has ended and it is a tie.";
         }
-    }
+        else {
+            return "";
+        }
+        }
+
     public Player getNextPlayer(Player player) {
         if (player == X) {
             return O;
@@ -38,11 +41,6 @@ public class Connect4 {
         else {
             return X;
         }
-    }
-
-    public static int getInput(Scanner scanner, Player player) {
-        System.out.printf("Enter an integer, Player %s:%n", player);
-        return scanner.nextInt();
     }
 
     public Result checkWin(Player player) {
