@@ -19,13 +19,13 @@ public class Dealer {
         valueMap.put("Jack", 10);
         valueMap.put("Queen", 10);
         valueMap.put("King", 10);
-        hand.add(deck.deck.remove(0));
+        hand.add(deck.draw());
     }
     public ArrayList<String> getHand() {
         return hand;
     }
     public void hit(Deck deck) {
-        hand.add(deck.deck.remove(0));
+        hand.add(deck.draw());
     }
     public int getScore() {
         int cardScore;

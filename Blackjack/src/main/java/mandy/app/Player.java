@@ -8,8 +8,8 @@ public class Player {
     private final ArrayList<String> hand = new ArrayList<>();
     private final HashMap<String, Integer> valueMap = new HashMap<>();
     public Player(Deck deck) {
-        hand.add(deck.deck.remove(0));
-        hand.add(deck.deck.remove(0));
+        hand.add(deck.draw());
+        hand.add(deck.draw());
         valueMap.put("Ace", 11);
         valueMap.put("Two", 2);
         valueMap.put("Three", 3);
@@ -33,7 +33,7 @@ public class Player {
     }
     public boolean playTurn(String action, Deck deck) {
         if (action.equalsIgnoreCase("hit")) {
-            hand.add(deck.deck.remove(0));
+            hand.add(deck.draw());
             System.out.println("You have " + hand);
             return true;
         }

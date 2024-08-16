@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class BlackjackGame {
     public static void main(String[] args) {
         Deck deck = new Deck();
-        deck.deck = deck.deckShuffle(deck.deck);
         Scanner scanner = new Scanner(System.in);
         //TODO where the actual playing code will go
         Dealer dealer = new Dealer(deck);
