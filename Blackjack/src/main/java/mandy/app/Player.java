@@ -50,8 +50,8 @@ public class Player {
         int total = 0;
         int aceCounter = 0;
         String cardNumber;
-        for (int i = 0; i < hand.size(); i++) { //find first total
-            cardNumber = hand.get(i).split(" ")[i];
+        for (String s : hand) { //find first total
+            cardNumber = s.split(" ")[0];
             if (cardNumber.equals("Ace")) {
                 aceCounter++;
             }
