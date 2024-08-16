@@ -2,17 +2,17 @@ package mandy.app;
 
 import java.util.Scanner;
 
-public class BlackjackGame {
+public class BlackjackGame { //TODO refactor this into game parts then make an actual game class.
     public static void main(String[] args) {
         Deck deck = new Deck();
         Scanner scanner = new Scanner(System.in);
-        //TODO where the actual playing code will go
         Dealer dealer = new Dealer(deck);
         Player player = new Player(deck);
         boolean active;
         int playerScore;
         int dealerScore;
         System.out.println("The dealer has " + dealer.getHand());
+        //TODO fix object printing, currently unplayable because of display problems
         System.out.println("You have " + player.getHand());
         do {
             active = player.playTurn(player.getInput(scanner), deck);

@@ -1,14 +1,34 @@
 package mandy.app;
 
-public class Blackjack {
-    private final Deck deck;
-    private final Player player;
-    private final Dealer dealer;
+import java.util.ArrayList;
+import static mandy.app.Value.*;
 
-    public Blackjack(Deck deck, Player player, Dealer dealer) {
-        this.deck = deck;
-        this.player = player;
-        this.dealer = dealer;
+public class Blackjack {
+    private final ArrayList<Card> hand;
+    public Blackjack() {
+        hand = new ArrayList<>();
     }
-    //this class may eventually be deleted if it's not needed.
+    public void hit(Deck deck) {
+        hand.add(deck.draw());
+    }
+    public int getScore() {
+        int cardScore;
+        int total = 0;
+        int aceCounter = 0;
+        for (Card card : hand) { //find first total
+            if (card.equals(ACE)) {
+                aceCounter++;
+            }
+            cardScore = card.getValue().getNumber();
+            total = total + cardScore;
+        }
+        while (total > 21 && aceCounter > 0) { //reduce aces if needed
+            aceCounter--;
+            total = total - 10;
+        }
+        return total;
+    }
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
 }
