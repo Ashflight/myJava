@@ -1,9 +1,51 @@
 package mandy.app;
-
-import java.util.Scanner;
+import static mandy.app.Result.*;
 
 public class Blackjack {
-    Deck deck = new Deck();
-    Dealer dealer = new Dealer(deck);
-    Player player = new Player(deck);
+    private Deck deck;
+    Dealer dealer;
+    private Player player;
+    public Blackjack() {
+        deck = new Deck();
+        dealer = new Dealer(deck);
+        player = new Player(deck);
+    }
+    public void display() {
+        System.out.println("The dealer has: " + dealer.getHand());
+        System.out.println("You have: " + player.getHand());
+    }
+    public Result playerTurn(String input) {
+        player.playTurn(input, deck);
+        if (player.getScore() > 21) {
+            return BUST;
+        }
+        else if (player.getScore() == 21) {
+            return WIN;
+        }
+        else return CONTINUE;
+    }
+    public Result dealerTurn() {
+        do {
+            dealer.hit(deck);
+        } while (dealer.getScore() < 17);
+        display();
+        if (dealer.getScore() > 21) {
+            return BUST;
+        }
+        else if (dealer.getScore() == 21) {
+            return WIN;
+        }
+        else return CONTINUE;
+    }
+    public Result compareScores() {
+        if (player.getScore() > dealer.getScore()) {
+            return WIN;
+        }
+        else if (player.getScore() < dealer.getScore()) {
+            return BUST;
+        }
+        else {
+            return TIE;
+        }
+    }
 }
