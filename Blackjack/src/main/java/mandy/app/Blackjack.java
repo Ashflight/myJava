@@ -3,7 +3,7 @@ import static mandy.app.Result.*;
 
 public class Blackjack {
     private Deck deck;
-    Dealer dealer;
+    private Dealer dealer;
     private Player player;
     public Blackjack() {
         deck = new Deck();
@@ -11,8 +11,8 @@ public class Blackjack {
         player = new Player(deck);
     }
     public void display() {
-        System.out.println("The dealer has: " + dealer.getHand());
-        System.out.println("You have: " + player.getHand());
+        System.out.println("The dealer has: " + dealer.getPrintableHand());
+        System.out.println("You have: " + player.getPrintableHand());
     }
     public Result playerTurn(String input) {
         player.playTurn(input, deck);

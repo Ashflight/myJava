@@ -22,9 +22,6 @@ public enum Value {
         this.text = text;
         this.number = number;
     }
-    public String getText() {
-        return text;
-    }
     public int getNumber() {
         return number;
     }
