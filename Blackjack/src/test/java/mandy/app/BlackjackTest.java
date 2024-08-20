@@ -7,4 +7,9 @@ public class BlackjackTest {
     public void test() {
         assertTrue(true, "edit later");
     }
+
+    @Test
+    public void testCompareScore() {
+        //User mockUser = Mockito.mock(User.class);
+    }
 }

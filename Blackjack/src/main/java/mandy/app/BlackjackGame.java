@@ -9,7 +9,7 @@ public class BlackjackGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Blackjack blackjack = new Blackjack();
-        blackjack.display(); //TODO fix object printing, currently unplayable because of display problems
+        display(blackjack);
         if (playerTurn(scanner, blackjack)) {
             return;
         }
@@ -17,15 +17,15 @@ public class BlackjackGame {
             return;
         }
         displayResult(blackjack);
+        //TODO let user keep playing? add score tracker?
     }
     private static boolean playerTurn(Scanner scanner, Blackjack blackjack) {
         String input;
         Result status;
-        do { //TODO turn this into a player turn function
+        do {
             input = getInput(scanner);
-            // get hit from player, call blackjack "player hit"
             status = blackjack.playerTurn(input);
-            // return result, win/not win
+            display(blackjack);
             if (status == WIN) {
                 System.out.println("You scored 21, you win!");
                 return true;
@@ -38,6 +38,7 @@ public class BlackjackGame {
     }
     private static boolean dealerTurn(Blackjack blackjack) {
         Result status = blackjack.dealerTurn();
+        display(blackjack);
         if (status == WIN) {
             System.out.println("The dealer scored 21, you lose.");
             return true;
@@ -62,5 +63,12 @@ public class BlackjackGame {
     public static String getInput(Scanner scanner) {
         System.out.print("Hit or stand? ");
         return scanner.nextLine();
+    }
+    public static void display(Blackjack blackjack) {
+        System.out.println("=========================================================================");
+        System.out.println("The dealer has: " + blackjack.getDealer().getPrintableHand()
+                + " Their score is " + blackjack.getDealer().getScore() + ".");
+        System.out.println(String.format("You have: %s. The Score is %s",
+                blackjack.getPlayer().getPrintableHand(), blackjack.getPlayer().getScore()));
     }
 }

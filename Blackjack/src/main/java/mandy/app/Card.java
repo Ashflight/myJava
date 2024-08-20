@@ -13,4 +13,7 @@ public class Card {
     public Value getValue() {
         return value;
     }
+    public String toString() {
+        return getValue().toString() + " of " + getSuit().toString();
+    }
 }

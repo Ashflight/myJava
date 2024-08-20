@@ -2,6 +2,8 @@ package mandy.app;
 
 import java.util.ArrayList;
 
+import static mandy.app.Result.*;
+
 public class Player extends Base {
     private final ArrayList<Card> hand;
     public Player(Deck deck) {
@@ -10,10 +12,18 @@ public class Player extends Base {
         hand.add(deck.draw());
         hand.add(deck.draw());
     }
-    public void playTurn(String action, Deck deck) {
+    public Result playTurn(String action, Deck deck) {
         if (action.equalsIgnoreCase("hit")) {
             hit(deck);
-            System.out.println("You have " + getPrintableHand());
+        }
+        if (getScore() > 21) {
+            return BUST;
+        }
+        else if (getScore() == 21) {
+            return WIN;
+        }
+        else {
+            return CONTINUE;
         }
     }
 }
