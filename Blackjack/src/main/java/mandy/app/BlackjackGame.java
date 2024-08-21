@@ -31,12 +31,18 @@ public class BlackjackGame {
             }
             else if (playerReturn == BUST) {
                 balance = balance - bet;
+                if (checkBalance(balance)) {
+                    return;
+                }
                 playing = updatePlaying(scanner);
                 continue;
             }
             Result dealerReturn = dealerTurn(blackjack);
             if (dealerReturn == WIN) {
                 balance = balance - bet;
+                if (checkBalance(balance)) {
+                    return;
+                }
                 playing = updatePlaying(scanner);
                 continue;
             }
@@ -51,6 +57,9 @@ public class BlackjackGame {
             }
             else if (finalResult == BUST) {
                 balance = balance - bet;
+            }
+            if (checkBalance(balance)) {
+                return;
             }
             playing = updatePlaying(scanner);
         } while (playing);
@@ -117,6 +126,13 @@ public class BlackjackGame {
         int nextInt = scanner.nextInt();
         scanner.nextLine();
         return nextInt;
+    }
+    public static boolean checkBalance(int balance) {
+        if (balance < 1) {
+            System.out.println("You ran out of tokens, game over.");
+            return true;
+        }
+        return false;
     }
     public static void display(Blackjack blackjack) {
         System.out.println("===========================================================================");
