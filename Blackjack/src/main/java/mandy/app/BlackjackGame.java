@@ -7,19 +7,56 @@ import static mandy.app.Result.WIN;
 
 public class BlackjackGame {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Blackjack blackjack = new Blackjack();
-        display(blackjack);
-        if (playerTurn(scanner, blackjack)) {
-            return;
-        }
-        if (dealerTurn(blackjack)) {
-            return;
-        }
-        displayResult(blackjack);
-        //TODO let user keep playing? add score tracker?
+        boolean playing;
+        int balance = 10;
+        int bet;
+        do {
+            Scanner scanner = new Scanner(System.in);
+            Blackjack blackjack = new Blackjack();
+            System.out.println("You have " + balance + " token(s).");
+            bet = getBet(scanner);
+            display(blackjack);
+            if (checkBlackjack(blackjack)) {
+                //FYI blackjack is when your had is ace of spades + jack of spades or clubs (a black suit basically)
+                // it gives you an increased payout, usually 10x the bet.
+                balance = balance + 10*bet;
+                playing = updatePlaying(scanner);
+                continue;
+            }
+            Result playerReturn = playerTurn(scanner, blackjack);
+            if (playerReturn == WIN) {
+                balance = balance + bet;
+                playing = updatePlaying(scanner);
+                continue;
+            }
+            else if (playerReturn == BUST) {
+                balance = balance - bet;
+                playing = updatePlaying(scanner);
+                continue;
+            }
+            Result dealerReturn = dealerTurn(blackjack);
+            if (dealerReturn == WIN) {
+                balance = balance - bet;
+                playing = updatePlaying(scanner);
+                continue;
+            }
+            else if (dealerReturn == BUST) {
+                balance = balance + bet;
+                playing = updatePlaying(scanner);
+                continue;
+            }
+            Result finalResult = checkResult(blackjack);
+            if (finalResult == WIN) {
+                balance = balance + bet;
+            }
+            else if (finalResult == BUST) {
+                balance = balance - bet;
+            }
+            playing = updatePlaying(scanner);
+        } while (playing);
+        System.out.println("Your final balance is " + balance + " tokens.");
     }
-    private static boolean playerTurn(Scanner scanner, Blackjack blackjack) {
+    private static Result playerTurn(Scanner scanner, Blackjack blackjack) {
         String input;
         Result status;
         do {
@@ -28,47 +65,64 @@ public class BlackjackGame {
             display(blackjack);
             if (status == WIN) {
                 System.out.println("You scored 21, you win!");
-                return true;
+                return status;
             } else if (status == BUST) {
                 System.out.println("Your hand bust, you lost.");
-                return true;
+                return status;
             }
         } while (input.equals("hit"));
-        return false;
+        return status;
     }
-    private static boolean dealerTurn(Blackjack blackjack) {
+    private static Result dealerTurn(Blackjack blackjack) {
         Result status = blackjack.dealerTurn();
         display(blackjack);
         if (status == WIN) {
             System.out.println("The dealer scored 21, you lose.");
-            return true;
+            return status;
         } else if (status == BUST) {
             System.out.println("The dealer's hand bust, you win!");
-            return true;
+            return status;
         }
-        return false;
+        return status;
     }
-    private static void displayResult(Blackjack blackjack) {
+    private static Result checkResult(Blackjack blackjack) {
         Result status = blackjack.compareScores();
         if (status == WIN) {
             System.out.println("You scored higher than the dealer, you win!");
-        }
-        else if (status == BUST) {
+            return status;
+        } else if (status == BUST) {
             System.out.println("The dealer scored higher than you, you lost.");
-        }
-        else {
+            return status;
+        } else {
             System.out.println("You and the dealer scored the same, it is a tie.");
+            return status;
         }
     }
+    private static boolean checkBlackjack(Blackjack blackjack) {
+        return blackjack.checkBlackjack();
+    }
+
     public static String getInput(Scanner scanner) {
         System.out.print("Hit or stand? ");
         return scanner.nextLine();
     }
+
+    public static boolean updatePlaying(Scanner scanner) {
+        System.out.print("Do you want to play again? ");
+        return scanner.nextLine().equalsIgnoreCase("yes");
+    }
+
+    public static int getBet(Scanner scanner) {
+        System.out.print("How many tokens do you want to bet? ");
+        int nextInt = scanner.nextInt();
+        scanner.nextLine();
+        return nextInt;
+    }
     public static void display(Blackjack blackjack) {
-        System.out.println("=========================================================================");
-        System.out.println("The dealer has: " + blackjack.getDealer().getPrintableHand()
-                + " Their score is " + blackjack.getDealer().getScore() + ".");
-        System.out.println(String.format("You have: %s. The Score is %s",
-                blackjack.getPlayer().getPrintableHand(), blackjack.getPlayer().getScore()));
+        System.out.println("===========================================================================");
+        System.out.printf("The dealer has: %s. Their score is %s.%n",
+                blackjack.getDealer().getPrintableHand(), blackjack.getDealer().getScore());
+        System.out.printf("You have: %s. Your score is %s.%n",
+                blackjack.getPlayer().getPrintableHand(), blackjack.getPlayer().getScore());
     }
 }
