@@ -23,7 +23,7 @@ public class DealerTest {
         assertEquals(card2, deck.peek(0));
     }
     @Test
-    public void testPlayTurn1() {
+    public void shouldBustWhenOver21() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(DIAMONDS, QUEEN));
         presetDeck.add(new Card(SPADES, SIX));
@@ -35,14 +35,28 @@ public class DealerTest {
         assertEquals(3, dealer.getHand().size());
     }
     @Test
-    public void testPlayTurn2() {
+    public void checkPlayerScoreEffect() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(DIAMONDS, QUEEN));
-        presetDeck.add(new Card(SPADES, SEVEN));
+        presetDeck.add(new Card(SPADES, FIVE));
+        presetDeck.add(new Card(HEARTS, THREE));
+        presetDeck.add(new Card(CLUBS, FOUR));
+        presetDeck.add(new Card(HEARTS, TWO));
+        Deck deck = new Deck(presetDeck);
+        Dealer dealer = new Dealer(deck);
+        assertEquals(BUST, dealer.playTurn(deck, 19));
+        assertEquals(4, dealer.getHand().size());
+    }
+    @Test
+    public void shouldWinWhen21() {
+        ArrayList<Card> presetDeck = new ArrayList<>();
+        presetDeck.add(new Card(DIAMONDS, QUEEN));
+        presetDeck.add(new Card(SPADES, SIX));
         presetDeck.add(new Card(HEARTS, EIGHT));
         presetDeck.add(new Card(CLUBS, THREE));
         Deck deck = new Deck(presetDeck);
         Dealer dealer = new Dealer(deck);
-        assertEquals(BUST, dealer.playTurn(deck, 18));
+        assertEquals(BUST, dealer.playTurn(deck, 17));
+        assertEquals(3, dealer.getHand().size());
     }
 }
