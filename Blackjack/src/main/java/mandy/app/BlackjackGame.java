@@ -51,13 +51,6 @@ public class BlackjackGame {
                 playing = updatePlaying(scanner);
                 continue;
             }
-            Result finalResult = checkResult(blackjack);
-            if (finalResult == WIN) {
-                balance = balance + bet;
-            }
-            else if (finalResult == BUST) {
-                balance = balance - bet;
-            }
             if (checkBalance(balance)) {
                 return;
             }
@@ -92,18 +85,8 @@ public class BlackjackGame {
             System.out.println("The dealer's hand bust, you win!");
             return status;
         }
-        return status;
-    }
-    private static Result checkResult(Blackjack blackjack) {
-        Result status = blackjack.compareScores();
-        if (status == WIN) {
-            System.out.println("You scored higher than the dealer, you win!");
-            return status;
-        } else if (status == BUST) {
-            System.out.println("The dealer scored higher than you, you lost.");
-            return status;
-        } else {
-            System.out.println("You and the dealer scored the same, it is a tie.");
+        else {
+            System.out.println("You and the dealer score the same, the game has ended in a tie.");
             return status;
         }
     }

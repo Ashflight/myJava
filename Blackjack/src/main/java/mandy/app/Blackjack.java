@@ -25,17 +25,6 @@ public class Blackjack {
     public Result dealerTurn() {
         return dealer.playTurn(deck, player.getScore());
     }
-    public Result compareScores() {
-        if (player.getScore() > dealer.getScore()) {
-            return WIN;
-        }
-        else if (player.getScore() < dealer.getScore()) {
-            return BUST;
-        }
-        else {
-            return TIE;
-        }
-    }
     public boolean checkBlackjack() {
         ArrayList<String> case1 = new ArrayList<>();
         case1.add("Ace of Spades");
