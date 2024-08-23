@@ -13,6 +13,12 @@ public class Blackjack {
         dealer = new Dealer(deck);
         player = new Player(deck);
     }
+
+    public Blackjack(Deck deck, Player player, Dealer dealer) {
+        this.deck = deck;
+        this.player = player;
+        this.dealer = dealer;
+    }
     public Result playerTurn(String input) {
         return player.playTurn(input, deck);
     }
