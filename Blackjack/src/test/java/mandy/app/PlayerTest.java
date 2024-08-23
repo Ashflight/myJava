@@ -32,7 +32,7 @@ public class PlayerTest {
         assertEquals(card2, deck.peek(0));
     }
     @Test
-    public void testPlayTurn1() {
+    public void shouldReturnBustWhenScoreGreatThan21() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(DIAMONDS, QUEEN));
         presetDeck.add(new Card(SPADES, SEVEN));
@@ -43,7 +43,7 @@ public class PlayerTest {
         assertEquals(BUST, player.playTurn("hit", deck));
     }
     @Test
-    public void testPlayTurn2() {
+    public void shouldReturnWinWhenScoreIs21() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(HEARTS, ACE));
         presetDeck.add(new Card(SPADES, SIX));
@@ -54,7 +54,7 @@ public class PlayerTest {
         assertEquals(WIN, player.playTurn("hit", deck));
     }
     @Test
-    public void testPlayTurn3() {
+    public void shouldReturnContinueWhenScoreLessThan21() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(DIAMONDS, QUEEN));
         presetDeck.add(new Card(SPADES, NINE));
@@ -65,7 +65,7 @@ public class PlayerTest {
         assertEquals(CONTINUE, player.playTurn("hit", deck));
     }
     @Test
-    public void testPlayTurn4() {
+    public void shouldReturnContinueWhenUserInputStand() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(DIAMONDS, KING));
         presetDeck.add(new Card(SPADES, JACK));
