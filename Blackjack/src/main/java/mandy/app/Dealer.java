@@ -20,9 +20,8 @@ public class Dealer extends Base {
         else if (getScore() == 21 || getScore() > playerScore) {
             return WIN;
         }
-        else if (getScore() == playerScore) {
+        else {
             return TIE;
         }
-        else return BUST;
     }
 }
