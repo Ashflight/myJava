@@ -10,7 +10,7 @@ public class BlackjackGame {
         boolean playing;
         int balance = 10;
         int bet;
-        do { //TODO add the balance run out = game over back because i accidentally deleted it
+        do {
             Scanner scanner = new Scanner(System.in);
             Blackjack blackjack = new Blackjack();
             System.out.println("You have " + balance + " token(s).");

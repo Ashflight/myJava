@@ -1,11 +1,10 @@
 package mandy.app;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import java.util.ArrayList;
 import static mandy.app.Suit.*;
 import static mandy.app.Value.*;
+import static mandy.app.Result.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 public class BlackjackTest {
     @Test
@@ -15,7 +14,7 @@ public class BlackjackTest {
     }
 
     @Test
-    public void testCheckBlackjack() {
+    public void testCheckBlackjackCaseClubs() {
         ArrayList<Card> presetDeck = new ArrayList<>();
         presetDeck.add(new Card(SPADES, ACE));
         presetDeck.add(new Card(CLUBS, JACK));
@@ -30,5 +29,56 @@ public class BlackjackTest {
         Dealer dealer = new Dealer(deck);
         Blackjack blackjack = new Blackjack(deck, player, dealer);
         assertTrue(blackjack.checkBlackjack());
+    }
+    @Test
+    public void testCheckBlackjackCaseSpades() {
+        ArrayList<Card> presetDeck = new ArrayList<>();
+        presetDeck.add(new Card(SPADES, ACE));
+        presetDeck.add(new Card(SPADES, JACK));
+        presetDeck.add(new Card(HEARTS, NINE));
+        presetDeck.add(new Card(DIAMONDS, TWO));
+        presetDeck.add(new Card(HEARTS, THREE));
+        presetDeck.add(new Card(DIAMONDS, SIX));
+        presetDeck.add(new Card(CLUBS, FOUR));
+        presetDeck.add(new Card(CLUBS, KING));
+        Deck deck = new Deck(presetDeck);
+        Player player = new Player(deck);
+        Dealer dealer = new Dealer(deck);
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        assertTrue(blackjack.checkBlackjack());
+    }
+    @Test
+    public void testPlayerTurn() {
+        ArrayList<Card> presetDeck = new ArrayList<>();
+        presetDeck.add(new Card(SPADES, NINE));
+        presetDeck.add(new Card(CLUBS, TEN));
+        presetDeck.add(new Card(HEARTS, ACE));
+        presetDeck.add(new Card(DIAMONDS, TWO));
+        presetDeck.add(new Card(HEARTS, THREE));
+        presetDeck.add(new Card(DIAMONDS, SIX));
+        presetDeck.add(new Card(CLUBS, FOUR));
+        presetDeck.add(new Card(SPADES, KING));
+        Deck deck = new Deck(presetDeck);
+        Player player = new Player(deck);
+        Dealer dealer = new Dealer(deck);
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        assertEquals(WIN, blackjack.playerTurn("hit"));
+    }
+    @Test
+    public void testDealerTurn() {
+        ArrayList<Card> presetDeck = new ArrayList<>();
+        presetDeck.add(new Card(SPADES, NINE));
+        presetDeck.add(new Card(CLUBS, EIGHT));
+        presetDeck.add(new Card(HEARTS, ACE));
+        presetDeck.add(new Card(DIAMONDS, TEN));
+        presetDeck.add(new Card(HEARTS, THREE));
+        presetDeck.add(new Card(DIAMONDS, SIX));
+        presetDeck.add(new Card(CLUBS, FOUR));
+        presetDeck.add(new Card(SPADES, KING));
+        Deck deck = new Deck(presetDeck);
+        Player player = new Player(deck);
+        Dealer dealer = new Dealer(deck);
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        assertEquals(WIN, blackjack.dealerTurn());
     }
 }

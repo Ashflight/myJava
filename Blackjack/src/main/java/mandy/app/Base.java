@@ -34,7 +34,7 @@ public class Base {
     public ArrayList<String> getPrintableHand() {
         ArrayList<String> cardStrings = new ArrayList<>();
         for (Card card : hand) {
-            cardStrings.add(card.getValue().toString() + " of " + card.getSuit().toString());
+            cardStrings.add(card.toString());
         }
         return cardStrings;
     }
