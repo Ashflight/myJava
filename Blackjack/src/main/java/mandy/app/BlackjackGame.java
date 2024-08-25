@@ -79,10 +79,10 @@ public class BlackjackGame {
         Result status = blackjack.dealerTurn();
         display(blackjack);
         if (status == WIN) {
-            System.out.println("The dealer scored 21, you lose.");
+            System.out.println("The dealer scored closer to 21 than you, you lose.");
             return status;
         } else if (status == BUST) {
-            System.out.println("The dealer's hand bust, you win!");
+            System.out.println("The dealer's hand bust. or you scored closer to 21 than the dealer, you win!");
             return status;
         }
         else {
