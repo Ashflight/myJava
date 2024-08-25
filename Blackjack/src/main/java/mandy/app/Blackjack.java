@@ -42,4 +42,13 @@ public class Blackjack {
     public Player getPlayer() {
         return player;
     }
+    public Result getPlayerResult() {
+        if (checkBlackjack()) {
+            return BLACKJACK;
+        }
+        else if (player.getScore() == 21) {
+            return WIN;
+        }
+        return CONTINUE;
+    }
 }

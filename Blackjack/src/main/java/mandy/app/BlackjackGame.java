@@ -2,56 +2,31 @@ package mandy.app;
 
 import java.util.Scanner;
 
-import static mandy.app.Result.BUST;
-import static mandy.app.Result.WIN;
+import static mandy.app.Result.*;
 
 public class BlackjackGame {
     public static void main(String[] args) {
         boolean playing;
         int balance = 10;
-        int bet;
+        Scanner scanner = new Scanner(System.in);
+        BalanceManager balanceManager = new BalanceManager(balance);
         do {
-            Scanner scanner = new Scanner(System.in);
             Blackjack blackjack = new Blackjack();
-            System.out.println("You have " + balance + " token(s).");
-            bet = getBet(scanner);
+            System.out.println("You have " + balanceManager.getBalance() + " token(s).");
+            balanceManager.setBet(getBet(scanner));
             display(blackjack);
-            if (checkBlackjack(blackjack)) {
-                //FYI blackjack is when your had is ace of spades + jack of spades or clubs (a black suit basically)
-                // it gives you an increased payout, usually 10x the bet.
-                balance = balance + 10*bet;
-                playing = updatePlaying(scanner);
-                continue;
-            }
-            Result playerReturn = playerTurn(scanner, blackjack);
-            if (playerReturn == WIN) {
-                balance = balance + bet;
-                playing = updatePlaying(scanner);
-                continue;
-            }
-            else if (playerReturn == BUST) {
-                balance = balance - bet;
-                if (checkBalance(balance)) {
-                    return;
+            Result playerResult = blackjack.getPlayerResult();
+            balanceManager.updateBalance(playerResult);
+            if (!isRoundTerminated(playerResult)) {
+                playerResult = playerTurn(scanner, blackjack);
+                balanceManager.updateBalance(playerResult);
+                if (!isRoundTerminated(playerResult)) {
+                    playerResult = flipResult(dealerTurn(blackjack));
+                    balanceManager.updateBalance(playerResult);
                 }
-                playing = updatePlaying(scanner);
-                continue;
             }
-            Result dealerReturn = dealerTurn(blackjack);
-            if (dealerReturn == WIN) {
-                balance = balance - bet;
-                if (checkBalance(balance)) {
-                    return;
-                }
-                playing = updatePlaying(scanner);
-                continue;
-            }
-            else if (dealerReturn == BUST) {
-                balance = balance + bet;
-                playing = updatePlaying(scanner);
-                continue;
-            }
-            if (checkBalance(balance)) {
+            if (balanceManager.checkBalance()) {
+                System.out.println("You ran out of tokens, game over.");
                 return;
             }
             playing = updatePlaying(scanner);
@@ -109,13 +84,6 @@ public class BlackjackGame {
         int nextInt = scanner.nextInt();
         scanner.nextLine();
         return nextInt;
-    }
-    public static boolean checkBalance(int balance) {
-        if (balance < 1) {
-            System.out.println("You ran out of tokens, game over.");
-            return true;
-        }
-        return false;
     }
     public static void display(Blackjack blackjack) {
         System.out.println("===========================================================================");

@@ -1,10 +1,14 @@
 package mandy.app;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import java.util.ArrayList;
 import static mandy.app.Suit.*;
 import static mandy.app.Value.*;
 import static mandy.app.Result.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class BlackjackTest {
     @Test
@@ -49,36 +53,32 @@ public class BlackjackTest {
     }
     @Test
     public void testPlayerTurn() {
-        ArrayList<Card> presetDeck = new ArrayList<>();
-        presetDeck.add(new Card(SPADES, NINE));
-        presetDeck.add(new Card(CLUBS, TEN));
-        presetDeck.add(new Card(HEARTS, ACE));
-        presetDeck.add(new Card(DIAMONDS, TWO));
-        presetDeck.add(new Card(HEARTS, THREE));
-        presetDeck.add(new Card(DIAMONDS, SIX));
-        presetDeck.add(new Card(CLUBS, FOUR));
-        presetDeck.add(new Card(SPADES, KING));
-        Deck deck = new Deck(presetDeck);
-        Player player = new Player(deck);
-        Dealer dealer = new Dealer(deck);
+        //Given
+        Deck deck = Mockito.mock(Deck.class);
+        Player player = Mockito.mock(Player.class);
+        Dealer dealer = Mockito.mock(Dealer.class);
         Blackjack blackjack = new Blackjack(deck, player, dealer);
-        assertEquals(WIN, blackjack.playerTurn("hit"));
+        when(player.playTurn(eq("hit"), eq(deck))).thenReturn(WIN);
+
+        //When
+        Result result = blackjack.playerTurn("hit");
+
+        //Then
+        assertEquals(WIN, result);
+        verify(dealer, times(0)).playTurn(any(), anyInt());
     }
     @Test
     public void testDealerTurn() {
-        ArrayList<Card> presetDeck = new ArrayList<>();
-        presetDeck.add(new Card(SPADES, NINE));
-        presetDeck.add(new Card(CLUBS, EIGHT));
-        presetDeck.add(new Card(HEARTS, ACE));
-        presetDeck.add(new Card(DIAMONDS, TEN));
-        presetDeck.add(new Card(HEARTS, THREE));
-        presetDeck.add(new Card(DIAMONDS, SIX));
-        presetDeck.add(new Card(CLUBS, FOUR));
-        presetDeck.add(new Card(SPADES, KING));
-        Deck deck = new Deck(presetDeck);
-        Player player = new Player(deck);
-        Dealer dealer = new Dealer(deck);
+        Deck deck = Mockito.mock(Deck.class);
+        Player player = Mockito.mock(Player.class);
+        Dealer dealer = Mockito.mock(Dealer.class);
         Blackjack blackjack = new Blackjack(deck, player, dealer);
-        assertEquals(WIN, blackjack.dealerTurn());
+        int score = 17;
+        when(player.getScore()).thenReturn(score);
+        when(dealer.playTurn(eq(deck), eq(score))).thenReturn(WIN);
+
+        Result result = blackjack.dealerTurn();
+
+        assertEquals(WIN, result);
     }
 }
