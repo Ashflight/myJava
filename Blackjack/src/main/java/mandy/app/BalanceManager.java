@@ -14,6 +14,9 @@ public class BalanceManager {
     public void setBet(int newBet) {
         this.bet = newBet;
     }
+    public int getBet() {
+        return bet;
+    }
     public int updateBalance(Result result) {
         if (result == WIN) {
             balance = balance + bet;

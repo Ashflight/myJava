@@ -1,7 +1,6 @@
 package mandy.app;
 
 import java.util.Scanner;
-
 import static mandy.app.Result.*;
 
 public class BlackjackGame {

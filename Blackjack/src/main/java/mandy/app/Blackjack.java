@@ -1,7 +1,7 @@
 package mandy.app;
+
 import java.util.ArrayList;
 import java.util.Collections;
-
 import static mandy.app.Result.*;
 
 public class Blackjack {

@@ -1,6 +1,6 @@
 package mandy.app;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import static mandy.app.Result.*;
 
 public class Dealer extends Base {

@@ -81,4 +81,45 @@ public class BlackjackTest {
 
         assertEquals(WIN, result);
     }
+    @Test
+    public void testGetPlayerResultCaseBlackjack() {
+        Deck deck = Mockito.mock(Deck.class);
+        Player player = Mockito.mock(Player.class);
+        Dealer dealer = Mockito.mock(Dealer.class);
+        ArrayList<String> presetHand = new ArrayList<>();
+        presetHand.add("Ace of Spades");
+        presetHand.add("Jack of Spades");
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        when(player.getPrintableHand()).thenReturn(presetHand);
+
+        Result result = blackjack.getPlayerResult();
+
+        assertEquals(BLACKJACK, result);
+    }
+    @Test
+    public void testGetPlayerResultCaseWin() {
+        Deck deck = Mockito.mock(Deck.class);
+        Player player = Mockito.mock(Player.class);
+        Dealer dealer = Mockito.mock(Dealer.class);
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        int score = 21;
+        when(player.getScore()).thenReturn(score);
+
+        Result result = blackjack.getPlayerResult();
+
+        assertEquals(WIN, result);
+    }
+    @Test
+    public void testGetPlayerResultCaseOther() {
+        Deck deck = Mockito.mock(Deck.class);
+        Player player = Mockito.mock(Player.class);
+        Dealer dealer = Mockito.mock(Dealer.class);
+        Blackjack blackjack = new Blackjack(deck, player, dealer);
+        int score = 20;
+        when(player.getScore()).thenReturn(score);
+
+        Result result = blackjack.getPlayerResult();
+
+        assertEquals(CONTINUE, result);
+    }
 }
