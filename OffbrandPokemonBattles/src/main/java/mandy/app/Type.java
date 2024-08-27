@@ -1,14 +1,10 @@
 package mandy.app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static java.util.Arrays.*;
-
-public enum Type { // the type chart
-    // increased means moves of the type deal 2x damage to pokemon of these types
-    // decreased means moves of the type deal 0.5x damage to pokemon of these types
-    // immune means moves of the type deal no damage to pokemon of these types
-    // convoluted i know but DEAL WITH IT
+public enum Type {
     NORMAL("", "ROCK STEEL", "GHOST"),
     FIRE("GRASS ICE BUG STEEL", "FIRE WATER ROCK DRAGON", ""),
     WATER("FIRE GROUND ROCK", "WATER GRASS DRAGON", ""),
@@ -28,45 +24,36 @@ public enum Type { // the type chart
     STEEL("ICE ROCK FAIRY", "FIRE WATER ELECTRIC STEEL", ""),
     FAIRY("FIGHTING DRAGON DARK", "FIRE POISON STEEL", "");
 
-    private final ArrayList<Type> increase;
-    private final ArrayList<Type> decrease;
-    private final ArrayList<Type> immune;
+    private final List<String> increase;
+    private final List<String> decrease;
+    private final List<String> immune;
 
-    Type(String increase, String decrease, String immune) {
-        String[] stringArray = increase.split(" ");
-        ArrayList<String> stringList = new ArrayList<>(asList(stringArray));
-        ArrayList<Type> resistanceList = new ArrayList<>();
-        for (String string : stringList) {
-            resistanceList.add(Type.valueOf(string));
-        }
-        this.increase = resistanceList;
-
-        stringArray = decrease.split(" ");
-        stringList = new ArrayList<>(asList(stringArray));
-        ArrayList<Type> weaknessList = new ArrayList<>();
-        for (String string : stringList) {
-            weaknessList.add(Type.valueOf(string));
-        }
-        this.decrease = weaknessList;
-
-        stringArray = immune.split(" ");
-        stringList = new ArrayList<>(asList(stringArray));
-        ArrayList<Type> immunityList = new ArrayList<>();
-        for (String string : stringList) {
-            immunityList.add(Type.valueOf(string));
-        }
-        this.immune = immunityList;
+    Type(String increaseString, String decreaseString, String immuneString) {
+        this.increase = Arrays.asList(increaseString.split(" "));
+        this.decrease = Arrays.asList(decreaseString.split(" "));
+        this.immune = Arrays.asList(immuneString.split(" "));
     }
 
-    public ArrayList<Type> getIncrease() {
-        return increase;
+    public List<Type> getIncrease() {
+        return convertToEnum(increase);
     }
 
-    public ArrayList<Type> getDecrease() {
-        return decrease;
+    public List<Type> getDecrease() {
+        return convertToEnum(decrease);
     }
 
-    public ArrayList<Type> getImmune() {
-        return immune;
+    public List<Type> getImmune() {
+        return convertToEnum(immune);
+    }
+
+    private List<Type> convertToEnum(List<String> starterString) {
+        // return starterString.stream().map(Type::valueOf).toList();
+        List<Type> resultList = new ArrayList<>();
+        for (String s : starterString) {
+            if (!s.equals("")) {
+                resultList.add(Type.valueOf(s));
+            }
+        }
+        return resultList;
     }
 }
