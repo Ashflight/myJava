@@ -1,5 +1,8 @@
 package mandy.app;
 
+import java.util.ArrayList;
+import static mandy.app.Type.*;
+
 public class Pokemon {
     // for individual pokemon, like each of the 6 pokemon on you/the opponent's team.
     private final String name;
@@ -12,7 +15,9 @@ public class Pokemon {
     private int defStage;
     private final int speed;
     private int speedStage;
+    private ArrayList<Effect> currentEffects;
     private boolean alive;
+    private Move[] moves;
     public Pokemon(String name, Type[] type, int maxHP, int atk, int def, int speed) {
         this.name = name;
         this.type = type;
@@ -25,6 +30,16 @@ public class Pokemon {
         this.speed = speed;
         this.speedStage = 1;
         this.alive = true;
-        // i have no idea how i'm going to get enough data for each of the moves this got way more complicated than i thought
+        this.currentEffects = new ArrayList<>();
+        // I might have to hardcode all the moves, pokemon and trainers as package private classes...
+    }
+    public void setMove(int index, String name, Type type, int basePower, int maxPP, int accuracy, Pair[] selfEffects,
+                        Pair[] opponentEffects) {
+        moves[index] = new Move(name, type, basePower, maxPP, accuracy, selfEffects, opponentEffects);
+    }
+}
+class Sylveon extends Pokemon { // Penny's Sylveon. for testing needs.
+    public Sylveon() {
+        super("Sylveon", new Type[]{FAIRY}, 394, 350, 180, 240);
     }
 }
