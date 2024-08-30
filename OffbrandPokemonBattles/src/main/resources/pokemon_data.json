@@ -1,0 +1,65 @@
+{
+  "name": "Sylveon",
+  "types": ["FAIRY"],
+  "hp": 394,
+  "attack": 350,
+  "defense": 180,
+  "speed": 240,
+  "moves": [
+    {
+      "index": 0,
+      "name": "Moonblast",
+      "type": "FAIRY",
+      "power": 95,
+      "pp": 15,
+      "accuracy": 100,
+      "priority": 0,
+      "effects": [
+        {
+          "effect": "ATKDB",
+          "chance": 30
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Quick Attack",
+      "type": "NORMAL",
+      "power": 40,
+      "pp": 30,
+      "accuracy": 100,
+      "priority": 0,
+      "effects": []
+    },
+    {
+      "index": 2,
+      "name": "Shadow Ball",
+      "type": "GHOST",
+      "power": 80,
+      "pp": 15,
+      "accuracy": 100,
+      "priority": 0,
+      "effects": [
+        {
+          "effect": "DEFDB",
+          "chance": 20
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "Baby Doll Eyes",
+      "type": "FAIRY",
+      "power": 0,
+      "pp": 30,
+      "accuracy": 100,
+      "priority": 0,
+      "effects": [
+        {
+          "effect": "ATKDB",
+          "chance": 100
+        }
+      ]
+    }
+  ]
+}

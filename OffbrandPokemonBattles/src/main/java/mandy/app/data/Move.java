@@ -1,4 +1,9 @@
-package mandy.app;
+package mandy.app.data;
+
+import mandy.app.Effect;
+import mandy.app.Pair;
+import mandy.app.Triple;
+import mandy.app.Type;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -57,7 +62,7 @@ public class Move {
             return power;
         }
     }
-    public ArrayList<Effect> decideEffects(Pair[] allPossibleEffects) {
+    public ArrayList<mandy.app.Effect> decideEffects(Pair[] allPossibleEffects) {
         ArrayList<Effect> newEffects = new ArrayList<>();
         int randomNumber;
         Random random = new Random();
