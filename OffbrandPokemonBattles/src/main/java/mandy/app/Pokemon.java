@@ -1,6 +1,8 @@
 package mandy.app;
 
 import java.util.ArrayList;
+
+import static mandy.app.Effect.*;
 import static mandy.app.Type.*;
 
 public class Pokemon {
@@ -37,9 +39,20 @@ public class Pokemon {
                         Pair[] opponentEffects) {
         moves[index] = new Move(name, type, basePower, maxPP, accuracy, selfEffects, opponentEffects);
     }
+    public Triple useMove(int moveIndex, Type targetType) {
+        return moves[moveIndex].use(targetType);
+    }
 }
 class Sylveon extends Pokemon { // Penny's Sylveon. for testing needs.
     public Sylveon() {
         super("Sylveon", new Type[]{FAIRY}, 394, 350, 180, 240);
+        setMove(0, "Moonblast", FAIRY, 95, 15, 100, new Pair[] {},
+                new Pair[] {new Pair(ATKDB, 30)});
+        setMove(1, "Quick Attack", NORMAL, 40, 30, 100, new Pair[] {},
+                new Pair[] {}); // I do not know how to do priority moves yet.
+        setMove(2, "Shadow Ball", GHOST, 80, 15, 100, new Pair[] {},
+                new Pair[] {new Pair(DEFDB, 20)});
+        setMove(3, "Baby Doll Eyes", FAIRY, 0, 30, 100, new Pair[] {},
+                new Pair[] {new Pair(ATKDB, 100)});
     }
 }

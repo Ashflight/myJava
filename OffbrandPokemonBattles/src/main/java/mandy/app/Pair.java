@@ -1,4 +1,5 @@
 package mandy.app;
 
-public record Pair<A, B>(A effect, B chance) {}
-// trust this is needed for the move effects to function
+public record Pair(Effect effect, int chance) {}
+// this is a java tuple basically
+// trust I need this for the effects to work

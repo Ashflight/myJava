@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Type {
+    // increase means deals 2x damage to
+    // decrease means deals 0.5x damage to
+    // immune means deals no damage to
     NORMAL("", "ROCK STEEL", "GHOST"),
     FIRE("GRASS ICE BUG STEEL", "FIRE WATER ROCK DRAGON", ""),
     WATER("FIRE GROUND ROCK", "WATER GRASS DRAGON", ""),
