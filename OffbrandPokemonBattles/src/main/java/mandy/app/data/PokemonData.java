@@ -1,9 +1,10 @@
 package mandy.app.data;
 
+import mandy.app.Pokemon;
 import mandy.app.Type;
-// import com.fasterxml.jackson.databind.ObjectMapper;
-// fasterxml not working?
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class PokemonData {
@@ -15,6 +16,9 @@ public class PokemonData {
     private int speed;
     private List<Type> types;
     private List<Move> moves;
+
+    public PokemonData() {
+    }
 
     // Getters and Setters
     public int getHp() {

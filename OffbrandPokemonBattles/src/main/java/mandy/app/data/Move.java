@@ -1,7 +1,8 @@
 package mandy.app.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import mandy.app.Effect;
-import mandy.app.Pair;
 import mandy.app.Triple;
 import mandy.app.Type;
 
@@ -13,17 +14,25 @@ public class Move {
     private final String name;
     private final Type type;
     private final int power;
-    private final int pp;
+    private int currentPP;
+    private final int maxPP;
     private final int accuracy;
-    private final Pair[] selfEffects;
-    private final Pair[] opponentEffects;
-    public Move(String name, Type type, int basePower, int maxPP, int accuracy, Pair[] selfEffects,
-                Pair[] opponentEffects) {
+    private final int priority;
+    private final EffectBundle[] selfEffects;
+    private final EffectBundle[] opponentEffects;
+
+    @JsonCreator
+    public Move(@JsonProperty("name") String name, @JsonProperty("type") Type type, @JsonProperty("power") int power,
+                @JsonProperty("maxPP") int maxPP, @JsonProperty("accuracy") int accuracy,
+                @JsonProperty("priority") int priority, @JsonProperty("selfEffects") EffectBundle[] selfEffects,
+                @JsonProperty("opponentEffects") EffectBundle[] opponentEffects) {
         this.name = name;
         this.type = type;
-        this.power = basePower;
-        this.pp = maxPP;
+        this.power = power;
+        this.currentPP = maxPP;
+        this.maxPP = maxPP;
         this.accuracy = accuracy;
+        this.priority = priority;
         this.selfEffects = selfEffects;
         this.opponentEffects = opponentEffects;
     }
@@ -36,16 +45,16 @@ public class Move {
     public int getPower() {
         return power;
     }
-    public int getPp() {
-        return pp;
+    public int getCurrentPP() {
+        return currentPP;
     }
     public int getAccuracy() {
         return accuracy;
     }
-    public Pair[] getSelfEffects() {
+    public EffectBundle[] getSelfEffects() {
         return selfEffects;
     }
-    public Pair[] getOpponentEffects() {
+    public EffectBundle[] getOpponentEffects() {
         return opponentEffects;
     }
     public int getDamage(Type targetType) {
@@ -62,19 +71,20 @@ public class Move {
             return power;
         }
     }
-    public ArrayList<mandy.app.Effect> decideEffects(Pair[] allPossibleEffects) {
+    public ArrayList<mandy.app.Effect> decideEffects(EffectBundle[] allPossibleEffects) {
         ArrayList<Effect> newEffects = new ArrayList<>();
         int randomNumber;
         Random random = new Random();
-        for (Pair possibleEffect : allPossibleEffects) {
+        for (EffectBundle possibleEffect : allPossibleEffects) {
             randomNumber = random.nextInt(100);
-            if (randomNumber < possibleEffect.chance()) {
-                newEffects.add(possibleEffect.effect());
+            if (randomNumber < possibleEffect.getChance()) {
+                newEffects.add(possibleEffect.getEffect());
             }
         }
         return newEffects;
     }
     public Triple use(Type targetType) {
+        currentPP--;
         return new Triple(getDamage(targetType), decideEffects(selfEffects), decideEffects(opponentEffects));
     }
 }
