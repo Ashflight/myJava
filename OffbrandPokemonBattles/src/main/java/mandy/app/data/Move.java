@@ -21,6 +21,8 @@ public class Move {
     private final EffectBundle[] selfEffects;
     private final EffectBundle[] opponentEffects;
 
+    Random random = new Random();
+
     @JsonCreator
     public Move(@JsonProperty("name") String name, @JsonProperty("type") Type type, @JsonProperty("power") int power,
                 @JsonProperty("maxPP") int maxPP, @JsonProperty("accuracy") int accuracy,
@@ -74,7 +76,6 @@ public class Move {
     public ArrayList<mandy.app.Effect> decideEffects(EffectBundle[] allPossibleEffects) {
         ArrayList<Effect> newEffects = new ArrayList<>();
         int randomNumber;
-        Random random = new Random();
         for (EffectBundle possibleEffect : allPossibleEffects) {
             randomNumber = random.nextInt(100);
             if (randomNumber < possibleEffect.getChance()) {
@@ -82,6 +83,13 @@ public class Move {
             }
         }
         return newEffects;
+    }
+    public boolean checkHit() {
+        int randomNumber = random.nextInt(100);
+        if (randomNumber < accuracy) {
+            return true;
+        }
+        return false;
     }
     public Triple use(Type targetType) {
         currentPP--;

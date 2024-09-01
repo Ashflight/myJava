@@ -1,7 +1,7 @@
 {
   "name": "Sylveon",
   "types": ["FAIRY"],
-  "hp": 394,
+  "maxHP": 394,
   "attack": 350,
   "defense": 180,
   "speed": 240,

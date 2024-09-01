@@ -8,6 +8,6 @@ public class Game {
         //testing
         Pokemon sylveon = new Pokemon("Sylveon");
         System.out.println("Sylveon's moves: " + sylveon.getPokemonData().getMoves());
-        System.out.println("Sylveon's HP: " + sylveon.getPokemonData().getHp());
+        System.out.println("Sylveon's HP: " + sylveon.getPokemonData().getCurrentHP());
     }
 }

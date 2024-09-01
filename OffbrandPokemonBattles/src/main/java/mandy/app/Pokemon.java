@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Pokemon {
     // for individual pokemon, like each of the 6 pokemon on you/the opponent's team.
-    private Move[] moves;
     PokemonData pokemonData;
     public Pokemon(String name) {
         // read data from file
@@ -25,7 +24,7 @@ public class Pokemon {
     }
 
     public Triple useMove(int moveIndex, Type targetType) {
-        return moves[moveIndex].use(targetType);
+        return pokemonData.getMoves().get(moveIndex).use(targetType);
     }
 
     public PokemonData getPokemonData() {
