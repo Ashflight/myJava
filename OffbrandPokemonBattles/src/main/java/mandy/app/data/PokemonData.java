@@ -2,6 +2,7 @@ package mandy.app.data;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import mandy.app.Effect;
 import mandy.app.Type;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class PokemonData {
     private int speedStage;
     private final List<Type> types;
     private final List<Move> moves;
+    private List<Effect> effects;
 
     @JsonCreator
     public PokemonData(@JsonProperty("name") String name, @JsonProperty("maxHP") int maxHP, @JsonProperty("attack") int attack,
@@ -35,6 +37,7 @@ public class PokemonData {
         this.speedStage = 0;
         this.types = types;
         this.moves = moves;
+        this.effects = List.of();
     }
 
     // Getters and Setters
@@ -97,5 +100,23 @@ public class PokemonData {
 
     public List<Move> getMoves() {
         return moves;
+    }
+
+    public List<Effect> getEffects() {
+        return effects;
+    }
+
+    public void addEffect(Effect effect) {
+        if (!effects.contains(effect)) {
+            effects.add(effect);
+        }
+    }
+
+    public void removeEffect(Effect effect) {
+        for (Effect currentEffect : effects) {
+            if (currentEffect == effect) {
+                effects.remove(currentEffect);
+            }
+        }
     }
 }

@@ -13,11 +13,13 @@ public class Trainer {
 
     private final String name;
     private final List<Pokemon> team = List.of();
+    private Pokemon lead;
 
     public Trainer(String name, List<String> teamNames) {
         this.name = name;
         for (String pokemonName : teamNames) {
             team.add(new Pokemon(name));
         }
+        this.lead = team.get(0);
     }
 }
