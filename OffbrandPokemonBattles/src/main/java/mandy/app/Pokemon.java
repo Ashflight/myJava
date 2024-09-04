@@ -4,7 +4,6 @@ import mandy.app.data.PokemonData;
 import mandy.app.data.PokemonDataReader;
 
 import java.util.Random;
-import java.util.random.*;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
@@ -66,6 +65,7 @@ public class Pokemon {
                 messages.add(pokemonData.getName() + "'s speed dropped!");
             }
         }
+        return messages;
     }
 
     public List<String> addStatus(List<Effect> newEffects) {
