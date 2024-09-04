@@ -33,4 +33,12 @@ public class Trainer {
             }
         }
     }
+
+    public AttackEffects attack() { // TODO actually write something here
+        return null;
+    }
+
+    public void run() {
+        // TODO this needs to be done too.
+    }
 }

@@ -3,7 +3,7 @@ package mandy.app.data;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import mandy.app.Effect;
-import mandy.app.Triple;
+import mandy.app.AttackEffects;
 import mandy.app.Type;
 
 import java.util.ArrayList;
@@ -91,8 +91,8 @@ public class Move {
         }
         return false;
     }
-    public Triple use(Type targetType) {
+    public AttackEffects use(Type targetType) {
         currentPP--;
-        return new Triple(getDamage(targetType), decideEffects(selfEffects), decideEffects(opponentEffects));
+        return new AttackEffects(getDamage(targetType), decideEffects(selfEffects), decideEffects(opponentEffects));
     }
 }

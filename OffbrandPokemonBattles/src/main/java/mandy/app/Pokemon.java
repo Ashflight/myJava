@@ -26,7 +26,7 @@ public class Pokemon {
         }
     }
 
-    public Triple useMove(int moveIndex, Type targetType) {
+    public AttackEffects useMove(int moveIndex, Type targetType) {
         return pokemonData.getMoves().get(moveIndex).use(targetType);
     }
 
@@ -42,7 +42,8 @@ public class Pokemon {
         for (Effect effect : newEffects) {
             if (effect == ATKBUFF) {
                 pokemonData.setAttackStage(pokemonData.getAttackStage() + 1);
-                messages.add(getPokemonData().getName() + "'s attack rose!");
+                messages.add(getPokemonData().getName() + "'s attack rose!"); // move all the text out into game?
+                // so it doesn't return messages but generates the messages in the game class
             }
             else if (effect == ATKDB) {
                 pokemonData.setAttackStage(pokemonData.getAttackStage() - 1);
