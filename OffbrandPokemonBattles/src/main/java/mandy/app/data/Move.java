@@ -7,10 +7,15 @@ import mandy.app.AttackEffects;
 import mandy.app.Type;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Move {
     //for tracking each pokemon's moves
+    //TODO implement recoil (Penny's Flareon's Flare Blitz move currently does not have recoil)
+    //TODO implement fire spin residual damage (Penny's Flareon's Fire Spin move currently does not have its unique effect)
+    //TODO implement multi-hit (Penny's Jolteon's Pin Missile move currently does not have working multi-hit)
+    //TODO implement critical hits and moves with increased crit chance (like Penny's Leafeon's Leaf Blade move)
     private final String name;
     private final Type type;
     private final int power;
@@ -59,18 +64,25 @@ public class Move {
     public EffectBundle[] getOpponentEffects() {
         return opponentEffects;
     }
-    public int getDamage(Type targetType) {
+    public int getDamage(List<Type> userType, Type targetType, int attack, int opponentDefense) {
+        int rawDamage;
         if (type.getIncrease().contains(targetType)) {
-            return power*2;
+            rawDamage = power*2*attack/opponentDefense;
         }
         else if (type.getDecrease().contains(targetType)) {
-            return power/2;
+            rawDamage = power*attack/2/opponentDefense;
         }
         else if (type.getImmune().contains(targetType)) {
             return 0;
         }
         else {
-            return power;
+            rawDamage = power*attack/opponentDefense;
+        }
+        if (userType.contains(type)) {
+            return (int) (rawDamage*1.5f);
+        }
+        else {
+            return rawDamage;
         }
     }
     public ArrayList<mandy.app.Effect> decideEffects(EffectBundle[] allPossibleEffects) {
@@ -91,8 +103,8 @@ public class Move {
         }
         return false;
     }
-    public AttackEffects use(Type targetType) {
+    public AttackEffects use(List<Type> userType, Type targetType, int attack, int opponentDefense) {
         currentPP--;
-        return new AttackEffects(getDamage(targetType), decideEffects(selfEffects), decideEffects(opponentEffects));
+        return new AttackEffects(getDamage(userType, targetType, attack, opponentDefense), decideEffects(selfEffects), decideEffects(opponentEffects));
     }
 }

@@ -1,23 +1,23 @@
 {
-  "name": "Sylveon",
-  "types": ["FAIRY"],
-  "maxHP": 394,
-  "attack": 350,
-  "defense": 322,
-  "speed": 240,
+  "name": "Flareon",
+  "types": ["FIRE"],
+  "maxHP": 334,
+  "attack": 394,
+  "defense": 295,
+  "speed": 251,
   "moves": [
     {
-      "name": "Moonblast",
-      "type": "FAIRY",
-      "power": 95,
+      "name": "Flare Blitz",
+      "type": "FIRE",
+      "power": 120,
       "maxPP": 15,
       "accuracy": 100,
       "priority": 0,
       "selfEffects": [],
       "opponentEffects": [
         {
-          "effect": "ATKDB",
-          "chance": 30
+          "effect": "BURN",
+          "chance": 10
         }
       ]
     },
@@ -32,19 +32,14 @@
       "opponentEffects": []
     },
     {
-      "name": "Shadow Ball",
-      "type": "GHOST",
-      "power": 80,
+      "name": "Fire Spin",
+      "type": "FIRE",
+      "power": 35,
       "maxPP": 15,
-      "accuracy": 100,
+      "accuracy": 85,
       "priority": 0,
       "selfEffects": [],
-      "opponentEffects": [
-        {
-          "effect": "DEFDB",
-          "chance": 20
-        }
-      ]
+      "opponentEffects": []
     },
     {
       "name": "Baby Doll Eyes",

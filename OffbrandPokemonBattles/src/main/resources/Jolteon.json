@@ -1,22 +1,22 @@
 {
-  "name": "Sylveon",
-  "types": ["FAIRY"],
-  "maxHP": 394,
+  "name": "Jolteon",
+  "types": ["ELECTRIC"],
+  "maxHP": 334,
   "attack": 350,
-  "defense": 322,
-  "speed": 240,
+  "defense": 278,
+  "speed": 394,
   "moves": [
     {
-      "name": "Moonblast",
-      "type": "FAIRY",
-      "power": 95,
-      "maxPP": 15,
-      "accuracy": 100,
+      "name": "Thunder",
+      "type": "ELECTRIC",
+      "power": 110,
+      "maxPP": 10,
+      "accuracy": 70,
       "priority": 0,
       "selfEffects": [],
       "opponentEffects": [
         {
-          "effect": "ATKDB",
+          "effect": "PARALYSIS",
           "chance": 30
         }
       ]
@@ -32,19 +32,14 @@
       "opponentEffects": []
     },
     {
-      "name": "Shadow Ball",
-      "type": "GHOST",
-      "power": 80,
-      "maxPP": 15,
-      "accuracy": 100,
+      "name": "Pin Missile",
+      "type": "Bug",
+      "power": 25,
+      "maxPP": 20,
+      "accuracy": 95,
       "priority": 0,
       "selfEffects": [],
-      "opponentEffects": [
-        {
-          "effect": "DEFDB",
-          "chance": 20
-        }
-      ]
+      "opponentEffects": []
     },
     {
       "name": "Baby Doll Eyes",

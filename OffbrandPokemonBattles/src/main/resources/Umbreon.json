@@ -1,25 +1,20 @@
 {
-  "name": "Sylveon",
-  "types": ["FAIRY"],
+  "name": "Umbreon",
+  "types": ["DARK"],
   "maxHP": 394,
-  "attack": 350,
-  "defense": 322,
-  "speed": 240,
+  "attack": 251,
+  "defense": 372,
+  "speed": 251,
   "moves": [
     {
-      "name": "Moonblast",
-      "type": "FAIRY",
-      "power": 95,
+      "name": "Dark Pulse",
+      "type": "DARK",
+      "power": 80,
       "maxPP": 15,
       "accuracy": 100,
       "priority": 0,
       "selfEffects": [],
-      "opponentEffects": [
-        {
-          "effect": "ATKDB",
-          "chance": 30
-        }
-      ]
+      "opponentEffects": []
     },
     {
       "name": "Quick Attack",
@@ -32,17 +27,17 @@
       "opponentEffects": []
     },
     {
-      "name": "Shadow Ball",
-      "type": "GHOST",
-      "power": 80,
-      "maxPP": 15,
+      "name": "Psychic",
+      "type": "PSYCHIC",
+      "power": 90,
+      "maxPP": 10,
       "accuracy": 100,
       "priority": 0,
       "selfEffects": [],
       "opponentEffects": [
         {
           "effect": "DEFDB",
-          "chance": 20
+          "chance": 10
         }
       ]
     },

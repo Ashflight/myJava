@@ -5,9 +5,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import mandy.app.Effect;
 import mandy.app.Type;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PokemonData {
+
+//    private static HashMap<Integer, Float> stagesConverter = (HashMap<Integer, Float>)Map.of(
+//            -6, 1f/3f,
+//            -5, 2f/5f
+//    );
+    private static HashMap<Integer, Float> stagesConverter = new HashMap<>();
+    static {
+        stagesConverter.put(-6, 1f/4f);
+        stagesConverter.put(-5, 2f/7f);
+        stagesConverter.put(-4, 1f/3f);
+        stagesConverter.put(-3, 2f/5f);
+        stagesConverter.put(-2, 1f/2f);
+        stagesConverter.put(-1, 2f/3f);
+        stagesConverter.put(0, 1f);
+        stagesConverter.put(1, 3f/2f);
+        stagesConverter.put(2, 2f);
+        stagesConverter.put(3, 5f/2f);
+        stagesConverter.put(4, 3f);
+        stagesConverter.put(5, 7f/2f);
+        stagesConverter.put(6, 4f);
+    }
 
     private final String name;
     private final int maxHP;
@@ -55,7 +78,7 @@ public class PokemonData {
     }
 
     public int getAttack() {
-        return attack;
+        return (int) (attack*stagesConverter.get(attackStage));
     }
 
     public int getAttackStage() {
@@ -67,7 +90,7 @@ public class PokemonData {
     }
 
     public int getDefense() {
-        return defense;
+        return (int) (defense*stagesConverter.get(defenseStage));
     }
 
     public int getDefenseStage() {
@@ -79,7 +102,7 @@ public class PokemonData {
     }
 
     public int getSpeed() {
-        return speed;
+        return (int) (speed*stagesConverter.get(speedStage));
     }
 
     public int getSpeedStage() {
