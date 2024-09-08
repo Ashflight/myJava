@@ -33,7 +33,7 @@
     },
     {
       "name": "Pin Missile",
-      "type": "Bug",
+      "type": "BUG",
       "power": 25,
       "maxPP": 20,
       "accuracy": 95,

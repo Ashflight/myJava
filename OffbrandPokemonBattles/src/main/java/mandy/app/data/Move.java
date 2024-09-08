@@ -11,13 +11,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Move {
-    //for tracking each pokemon's moves
-    //TODO implement recoil (Penny's Flareon's Flare Blitz move currently does not have recoil)
-    //TODO implement fire spin residual damage (Penny's Flareon's Fire Spin move currently does not have its unique effect)
-    //TODO implement multi-hit (Penny's Jolteon's Pin Missile move currently does not have working multi-hit)
-    //TODO implement critical hits and moves with increased crit chance (like Penny's Leafeon's Leaf Blade move)
-    //maybe add these extra categories as like hardcoded lists of moves in that category since they're much rarer?
-    // this might have to go in the game class
+    // for tracking each pokemon's moves
+    // TODO implement recoil (Penny's Flareon's Flare Blitz move currently does not have recoil)
+    // needs design
+    // TODO implement fire spin residual damage (Penny's Flareon's Fire Spin move currently does not have its unique effect)
+    // honestly if this is that hard to do just swap it for a burn or something
+    // TODO implement multi-hit (Penny's Jolteon's Pin Missile move currently does not have working multi-hit)
+    // multi-hit design: use default value of 1
+    // TODO implement critical hits and moves with increased crit chance (like Penny's Leafeon's Leaf Blade move)
+    // use default value for this as well
     private final String name;
     private final Type type;
     private final int power;
