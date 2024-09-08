@@ -16,6 +16,8 @@ public class Move {
     //TODO implement fire spin residual damage (Penny's Flareon's Fire Spin move currently does not have its unique effect)
     //TODO implement multi-hit (Penny's Jolteon's Pin Missile move currently does not have working multi-hit)
     //TODO implement critical hits and moves with increased crit chance (like Penny's Leafeon's Leaf Blade move)
+    //maybe add these extra categories as like hardcoded lists of moves in that category since they're much rarer?
+    // this might have to go in the game class
     private final String name;
     private final Type type;
     private final int power;

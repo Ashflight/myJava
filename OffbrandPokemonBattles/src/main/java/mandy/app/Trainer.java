@@ -1,5 +1,6 @@
 package mandy.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trainer {
@@ -12,7 +13,7 @@ public class Trainer {
     // I severely underestimated how complicated this would get
 
     private final String name;
-    private final List<Pokemon> team = List.of();
+    private final List<Pokemon> team = new ArrayList<>(); // trust this breaks if it's not arraylist
     private Pokemon lead;
 
     public Trainer(String name, List<String> teamNames) {
@@ -36,9 +37,17 @@ public class Trainer {
 
     public AttackEffects attack() { // TODO actually write something here
         return null;
-    }
+    } //TODO actually write this
 
     public void run() {
         // TODO this needs to be done too.
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Pokemon getLead() {
+        return lead;
     }
 }

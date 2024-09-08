@@ -12,4 +12,8 @@ public enum Preset { //trust I need this to handle the input of team choices
     Preset(List<String> teamNames) {
         this.teamNames = teamNames;
     }
+
+    public List<String> getTeamNames() {
+        return teamNames;
+    }
 }
