@@ -23,7 +23,7 @@ public class Deck {
         return deck;
     }
 
-    public Card draw() { //TODO unit test this
+    public Card draw() {
         return deck.remove(0);
     }
     public Card peek(int index) {

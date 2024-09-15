@@ -19,7 +19,8 @@
           "effect": "BURN",
           "chance": 10
         }
-      ]
+      ],
+      "recoil": 40
     },
     {
       "name": "Quick Attack",

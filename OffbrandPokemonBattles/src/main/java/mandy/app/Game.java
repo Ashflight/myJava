@@ -8,6 +8,7 @@ public class Game {
     public static void main(String[] args) {
         //this will be place for game loop
         //also looking at my design SCREW ABILITIES they're going to be pain to add
+        //also weather doesn't exist either (Thunder is permanently at 70 accuracy right now)
 
         //testing
         String trainer1Name = "Penny";

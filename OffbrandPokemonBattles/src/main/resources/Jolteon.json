@@ -36,10 +36,11 @@
       "type": "BUG",
       "power": 25,
       "maxPP": 20,
-      "accuracy": 95,
+      "accuracy": 60,
       "priority": 0,
       "selfEffects": [],
-      "opponentEffects": []
+      "opponentEffects": [],
+      "hits": 5
     },
     {
       "name": "Baby Doll Eyes",

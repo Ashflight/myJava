@@ -12,14 +12,11 @@ import java.util.Random;
 
 public class Move {
     // for tracking each pokemon's moves
-    // TODO implement recoil (Penny's Flareon's Flare Blitz move currently does not have recoil)
-    // needs design
+    // TODO code for when a recoil move is used
     // TODO implement fire spin residual damage (Penny's Flareon's Fire Spin move currently does not have its unique effect)
     // honestly if this is that hard to do just swap it for a burn or something
-    // TODO implement multi-hit (Penny's Jolteon's Pin Missile move currently does not have working multi-hit)
-    // multi-hit design: use default value of 1
-    // TODO implement critical hits and moves with increased crit chance (like Penny's Leafeon's Leaf Blade move)
-    // use default value for this as well
+    // TODO code for when a multi-hit move is used
+    // TODO code crits
     private final String name;
     private final Type type;
     private final int power;
@@ -29,6 +26,9 @@ public class Move {
     private final int priority;
     private final EffectBundle[] selfEffects;
     private final EffectBundle[] opponentEffects;
+    private final int recoil;
+    private final int hits;
+    private final int critRate;
 
     Random random = new Random();
 
@@ -36,7 +36,8 @@ public class Move {
     public Move(@JsonProperty("name") String name, @JsonProperty("type") Type type, @JsonProperty("power") int power,
                 @JsonProperty("maxPP") int maxPP, @JsonProperty("accuracy") int accuracy,
                 @JsonProperty("priority") int priority, @JsonProperty("selfEffects") EffectBundle[] selfEffects,
-                @JsonProperty("opponentEffects") EffectBundle[] opponentEffects) {
+                @JsonProperty("opponentEffects") EffectBundle[] opponentEffects, @JsonProperty("recoil") Integer recoil,
+                @JsonProperty("hits") Integer hits, @JsonProperty("critRate") Integer critRate) {
         this.name = name;
         this.type = type;
         this.power = power;
@@ -46,19 +47,31 @@ public class Move {
         this.priority = priority;
         this.selfEffects = selfEffects;
         this.opponentEffects = opponentEffects;
+        this.recoil = (recoil != null) ? recoil : 0;
+        this.hits = (hits != null) ? hits : 1;
+        this.critRate = (critRate != null) ? critRate : 4; // APPROXIMATELY
     }
+
     public String getName() {
         return name;
     }
+
     public Type getType() {
         return type;
     }
+
     public int getPower() {
         return power;
     }
+
     public int getCurrentPP() {
         return currentPP;
     }
+
+    public int getMaxPP() {
+        return maxPP;
+    }
+
     public int getAccuracy() {
         return accuracy;
     }

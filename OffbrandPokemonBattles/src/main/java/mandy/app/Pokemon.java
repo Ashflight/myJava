@@ -61,24 +61,24 @@ public class Pokemon {
 
     public void addStatus(List<Effect> newEffects) {
         for (Effect effect : newEffects) {
-            if (effect == BURN) {
+            if (effect == BURN && !getPokemonData().getEffects().contains(BURN)) {
                 pokemonData.setAttackStage(pokemonData.getAttackStage()-1);
                 pokemonData.addEffect(effect);
             }
-            else if (effect == FREEZE) {
+            else if (effect == FREEZE && !getPokemonData().getEffects().contains(FREEZE)) {
                 pokemonData.addEffect(effect);
             }
-            else if (effect == PARALYSIS) {
+            else if (effect == PARALYSIS && !getPokemonData().getEffects().contains(PARALYSIS)) {
                 pokemonData.setSpeedStage(pokemonData.getSpeedStage() - 1);
                 pokemonData.addEffect(effect);
             }
             else if (effect == POISON) {
                 pokemonData.addEffect(effect);
             }
-            else if (effect == SLEEP) {
+            else if (effect == SLEEP && !getPokemonData().getEffects().contains(SLEEP)) {
                 pokemonData.addEffect(effect);
             }
-            else if (effect == CONFUSION) {
+            else if (effect == CONFUSION && !getPokemonData().getEffects().contains(CONFUSION)) {
                 pokemonData.addEffect(effect);
             }
         }

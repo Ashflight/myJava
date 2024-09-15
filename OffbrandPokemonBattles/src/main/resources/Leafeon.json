@@ -14,7 +14,8 @@
       "accuracy": 100,
       "priority": 0,
       "selfEffects": [],
-      "opponentEffects": []
+      "opponentEffects": [],
+      "critRate": 12
     },
     {
       "name": "Quick Attack",

@@ -35,12 +35,12 @@ public class Trainer {
         }
     }
 
-    public AttackEffects attack() { // TODO actually write something here
-        return null;
-    } //TODO actually write this
+    public AttackEffects attack(int moveIndex, Type targetType, int opponentDefense) {
+        return lead.useMove(moveIndex, targetType, opponentDefense);
+    }
 
     public void run() {
-        // TODO this needs to be done too.
+        // TODO this needs to be done
     }
 
     public String getName() {
