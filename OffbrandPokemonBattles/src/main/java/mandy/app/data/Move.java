@@ -35,7 +35,7 @@ public class Move {
     @JsonCreator
     public Move(@JsonProperty("name") String name, @JsonProperty("type") Type type, @JsonProperty("power") int power,
                 @JsonProperty("maxPP") int maxPP, @JsonProperty("accuracy") int accuracy,
-                @JsonProperty("priority") int priority, @JsonProperty("selfEffects") EffectBundle[] selfEffects,
+                @JsonProperty("priority") Integer priority, @JsonProperty("selfEffects") EffectBundle[] selfEffects,
                 @JsonProperty("opponentEffects") EffectBundle[] opponentEffects, @JsonProperty("recoil") Integer recoil,
                 @JsonProperty("hits") Integer hits, @JsonProperty("critRate") Integer critRate) {
         this.name = name;
@@ -44,9 +44,9 @@ public class Move {
         this.currentPP = maxPP;
         this.maxPP = maxPP;
         this.accuracy = accuracy;
-        this.priority = priority;
         this.selfEffects = selfEffects;
         this.opponentEffects = opponentEffects;
+        this.priority = (priority != null) ? priority : 0;
         this.recoil = (recoil != null) ? recoil : 0;
         this.hits = (hits != null) ? hits : 1;
         this.critRate = (critRate != null) ? critRate : 4; // APPROXIMATELY

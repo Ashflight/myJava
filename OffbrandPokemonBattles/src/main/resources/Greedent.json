@@ -1,0 +1,52 @@
+{
+  "name": "Greedent",
+  "types": ["NORMAL"],
+  "maxHP": 444,
+  "attack": 317,
+  "defense": 295,
+  "speed": 152,
+  "moves": [
+    {
+      "name": "Bullet Seed",
+      "type": "GRASS",
+      "power": 25,
+      "maxPP": 30,
+      "accuracy": 60,
+      "selfEffects": [],
+      "opponentEffects": [],
+      "hits": 5
+    },
+    {
+      "name": "Body Slam",
+      "type": "NORMAL",
+      "power": 85,
+      "maxPP": 15,
+      "accuracy": 100,
+      "selfEffects": [],
+      "opponentEffects": [
+        {
+          "effect": "PARALYSIS",
+          "chance": 30
+        }
+      ]
+    },
+    {
+      "name": "Psychic Fangs",
+      "type": "PSYCHIC",
+      "power": 85,
+      "maxPP": 10,
+      "accuracy": 100,
+      "selfEffects": [],
+      "opponentEffects": []
+    },
+    {
+      "name": "Earthquake",
+      "type": "Ground",
+      "power": 100,
+      "maxPP": 10,
+      "accuracy": 100,
+      "selfEffects": [],
+      "opponentEffects": []
+    }
+  ]
+}

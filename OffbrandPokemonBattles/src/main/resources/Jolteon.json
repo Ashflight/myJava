@@ -12,7 +12,6 @@
       "power": 110,
       "maxPP": 10,
       "accuracy": 70,
-      "priority": 0,
       "selfEffects": [],
       "opponentEffects": [
         {
@@ -37,7 +36,6 @@
       "power": 25,
       "maxPP": 20,
       "accuracy": 60,
-      "priority": 0,
       "selfEffects": [],
       "opponentEffects": [],
       "hits": 5
@@ -48,7 +46,6 @@
       "power": 0,
       "maxPP": 30,
       "accuracy": 100,
-      "priority": 0,
       "selfEffects": [],
       "opponentEffects": [
         {

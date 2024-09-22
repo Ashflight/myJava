@@ -1,0 +1,49 @@
+{
+  "name": "Lycanroc Midday",
+  "types": ["ROCK"],
+  "maxHP": 354,
+  "attack": 361,
+  "defense": 251,
+  "speed": 355,
+  "moves": [
+    {
+      "name": "Accelerock",
+      "type": "ROCK",
+      "power": 40,
+      "maxPP": 20,
+      "accuracy": 100,
+      "selfEffects": [],
+      "opponentEffects": [],
+      "priority": 1
+    },
+    {
+      "name": "Stone Edge",
+      "type": "ROCK",
+      "power": 100,
+      "maxPP": 5,
+      "accuracy": 80,
+      "selfEffects": [],
+      "opponentEffects": [],
+      "critRate": 12
+    },
+    {
+      "name": "Stealth Rock",
+      "type": "ROCK",
+      "power": 0,
+      "maxPP": 20,
+      "accuracy": 100,
+      "selfEffects": [],
+      "opponentEffects": []
+    },
+    {
+      "name": "Drill Run",
+      "type": "Ground",
+      "power": 80,
+      "maxPP": 10,
+      "accuracy": 95,
+      "selfEffects": [],
+      "opponentEffects": [],
+      "critRate": 12
+    }
+  ]
+}
