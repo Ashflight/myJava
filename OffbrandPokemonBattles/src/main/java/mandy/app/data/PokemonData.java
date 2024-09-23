@@ -11,10 +11,6 @@ import java.util.Map;
 
 public class PokemonData {
 
-//    private static HashMap<Integer, Float> stagesConverter = (HashMap<Integer, Float>)Map.of(
-//            -6, 1f/3f,
-//            -5, 2f/5f
-//    );
     private static HashMap<Integer, Float> stagesConverter = new HashMap<>();
     static {
         stagesConverter.put(-6, 1f/4f);
@@ -43,7 +39,7 @@ public class PokemonData {
     private int speedStage;
     private final List<Type> types;
     private final List<Move> moves;
-    private List<Effect> effects;
+    private final List<Effect> effects;
 
     @JsonCreator
     public PokemonData(@JsonProperty("name") String name, @JsonProperty("maxHP") int maxHP, @JsonProperty("attack") int attack,

@@ -115,10 +115,7 @@ public class Move {
     }
     public boolean checkHit() {
         int randomNumber = random.nextInt(100);
-        if (randomNumber < accuracy) {
-            return true;
-        }
-        return false;
+        return randomNumber < accuracy;
     }
     public AttackEffects use(List<Type> userType, Type targetType, int attack, int opponentDefense) {
         currentPP--;
