@@ -1,6 +1,7 @@
 package mandy.app;
 
 import mandy.app.Preset.*;
+import mandy.app.data.Move;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,8 @@ public class Game {
         //also weather doesn't exist either (Thunder is permanently at 70 accuracy right now)
         // TODO get this running first, even if it's just with two of the same team
         Scanner scanner = new Scanner(System.in);
+        int moveIndex1;
+        int moveIndex2;
         System.out.println("It's Player 1's turn to pick their team.");
         String trainer1Name = getTrainerChoice(scanner);
         Trainer trainer1 = new Trainer(trainer1Name, getTeamNameList(trainer1Name));
@@ -20,7 +23,12 @@ public class Game {
         Trainer trainer2 = new Trainer(trainer2Name, getTeamNameList(trainer2Name));
         System.out.println("It's time to battle!");
         do {
-            displayPokemon(trainer1, trainer2);
+            displayPokemon(trainer1, 1);
+            displayPokemon(trainer2, 2);
+            displayMoves(trainer1);
+            moveIndex1 = getMoveIndex(trainer1, 1, scanner);
+            displayMoves(trainer2);
+            moveIndex2 = getMoveIndex(trainer2, 2, scanner);
         } while (!trainer1.getTeam().isEmpty() || !trainer2.getTeam().isEmpty());
         // currently functional but DO NOT RUN it's just an endless loop
     }
@@ -36,25 +44,34 @@ public class Game {
         return name;
     }
 
-    public static void displayPokemon(Trainer trainer1, Trainer trainer2) {
-        System.out.println(trainer1.getName() + " (Player 1)");
-        System.out.println(trainer1.getLead().getPokemonData().getName());
-        System.out.print(trainer1.getLead().getPokemonData().getCurrentHP());
+    public static void displayPokemon(Trainer trainer, int player) {
+        System.out.println(trainer.getName() + " (Player " + player + ")");
+        System.out.println(trainer.getLead().getPokemonData().getName());
+        System.out.print(trainer.getLead().getPokemonData().getCurrentHP());
         System.out.print("/");
-        System.out.print(trainer1.getLead().getPokemonData().getMaxHP());
+        System.out.print(trainer.getLead().getPokemonData().getMaxHP());
         System.out.print(" HP\n");
-        if (!trainer1.getLead().getPokemonData().getEffects().isEmpty()) {
-            System.out.println(trainer1.getLead().getPokemonData().getEffects());
+        if (!trainer.getLead().getPokemonData().getEffects().isEmpty()) {
+            System.out.println(trainer.getLead().getPokemonData().getEffects());
         }
-        System.out.println(trainer2.getName() + " (Player 2)");
-        System.out.println(trainer2.getLead().getPokemonData().getName());
-        System.out.print(trainer2.getLead().getPokemonData().getCurrentHP());
-        System.out.print("/");
-        System.out.print(trainer2.getLead().getPokemonData().getMaxHP());
-        System.out.print(" HP\n");
-        if (!trainer2.getLead().getPokemonData().getEffects().isEmpty()) {
-            System.out.println(trainer2.getLead().getPokemonData().getEffects());
+    }
+
+    public static void displayMoves(Trainer trainer) {
+        for (Move move : trainer.getLead().getPokemonData().getMoves()) {
+            System.out.println("(" + move.getType() + ") " + move.getName() + ", " + move.getCurrentPP() + "/"
+                    + move.getMaxPP() + " PP");
         }
+    }
+
+    public static int getMoveIndex(Trainer trainer, int player, Scanner scanner) {
+        System.out.println("ENTER: ");
+        for (int i = 0; i < trainer.getLead().getPokemonData().getMoves().size(); i++) {
+            System.out.println(i + " for " + trainer.getLead().getPokemonData().getMoves().get(i));
+        }
+        System.out.println("Which move do you want to use, Player " + player + "?");
+        int moveInt = scanner.nextInt();
+        scanner.nextLine();
+        return moveInt;
     }
 
     //some code for processing multi-hit damage that i put in the wrong place but might be able to salvage/reuse
