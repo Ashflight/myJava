@@ -3,6 +3,7 @@ package mandy.app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class Main {
         }
         Collections.shuffle(randomNumbers);
         System.out.println("Unordered List: " + randomNumbers);
-        // System.out.println(Sorts.sequentialSort(randomNumbers));
+        System.out.println(Sorts.sequentialSort(randomNumbers)); // has problems currently
         System.out.println(Sorts.insertionSort(randomNumbers));
         System.out.println(Sorts.mergeSort(randomNumbers));
         System.out.println(Sorts.quickSort(randomNumbers));
