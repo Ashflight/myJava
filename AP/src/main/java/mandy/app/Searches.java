@@ -35,22 +35,22 @@ public class Searches {
     }
     public static int recursiveBinarySearch(int[] data, int target, int low, int high) {
         int index;
-        int mid = (low + high + 1) / 2;
-        if (low > high || mid >= data.length) {
+        int mid = (low + high) / 2;
+        if (target < data[low] || target > data[high]) {
             return -1;
         }
         if (data[mid] == target) {
             return mid;
         }
         else if (data[mid] > target) {
-            index = recursiveBinarySearch(data, target, low, mid);
+            index = recursiveBinarySearch(data, target, low, mid - 1);
         }
         else {
-            index = recursiveBinarySearch(data, target, mid, high);
+            index = recursiveBinarySearch(data, target, mid + 1, high);
         }
         return index;
     }
     public static int recursiveBinarySearch(int[] data, int target) {
-        return recursiveBinarySearch(data, target, 0, data.length);
+        return recursiveBinarySearch(data, target, 0, data.length - 1);
     }
 }
