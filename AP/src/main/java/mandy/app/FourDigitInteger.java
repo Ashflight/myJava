@@ -24,8 +24,15 @@ public class FourDigitInteger {
         // To be implemented in part (b)
         //My Answer:
         String valueString = "" + value;
-        return valueString.substring(0,1).equals(valueString.substring(3,4)) && valueString.substring(1,2).equals(valueString.substring(2,3));
+        return valueString.substring(0,1).equals(valueString.substring(3,4)) &&
+                valueString.substring(1,2).equals(valueString.substring(2,3));
         // Not the solution suggested by the textbook but still functional.
+    }
+
+    public boolean isPalindromeButBetter(String data)
+    {
+        // TODO (Recursive and non-recursive versions)
+        return true;
     }
 
     /** Return true if value is a perfect square, false otherwise. */

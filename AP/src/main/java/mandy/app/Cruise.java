@@ -21,6 +21,7 @@ public class Cruise {
             }
         }
         // My original answer had an unnecessary "return" at the end which has been removed here
+        // Should've used indexOf for better conciseness
     }
 
     public int calculateRevenue() {
