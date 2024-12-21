@@ -31,21 +31,25 @@ public class FourDigitInteger {
 
     // These 2? 3? functions were a later addition, outside the given questions.
 
-    public boolean isPalindromeButBetter(String data)
+    public boolean isPalindromeIterative()
     {
+        String data = "" + value;
         int start = 0;
         int end = data.length() - 1;
         while (start < end) {
             if (data.charAt(start) != data.charAt(end)) { // discovery of charAt is a lifesaver, no more ugly complicated substrings
                 return false;
             }
+            start++;
+            end--;
         }
         return true;
     }
 
-    public boolean isPalindromeRecursive(String data)
+    public boolean isPalindromeRecursive()
     {
-        return isPalindromeRecursive(data, 0, data.length());
+        String data = "" + value;
+        return isPalindromeRecursive(data, 0, data.length() - 1);
     }
 
     public boolean isPalindromeRecursive(String data, int start, int end)
