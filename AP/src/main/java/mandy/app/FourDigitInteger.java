@@ -29,9 +29,35 @@ public class FourDigitInteger {
         // Not the solution suggested by the textbook but still functional.
     }
 
+    // These 2? 3? functions were a later addition, outside the given questions.
+
     public boolean isPalindromeButBetter(String data)
     {
-        // TODO (Recursive and non-recursive versions)
+        int start = 0;
+        int end = data.length() - 1;
+        while (start < end) {
+            if (data.charAt(start) != data.charAt(end)) { // discovery of charAt is a lifesaver, no more ugly complicated substrings
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isPalindromeRecursive(String data)
+    {
+        return isPalindromeRecursive(data, 0, data.length());
+    }
+
+    public boolean isPalindromeRecursive(String data, int start, int end)
+    {
+        if (start < end && data.charAt(start) == data.charAt(end)) {
+            start++;
+            end--;
+            return isPalindromeRecursive(data, start, end);
+        }
+        if (start < end) {
+            return false;
+        }
         return true;
     }
 

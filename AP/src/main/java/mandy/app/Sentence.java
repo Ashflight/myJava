@@ -16,7 +16,19 @@ public class Sentence {
         // My Answer:
         ArrayList<Integer> blanks = new ArrayList<>();
         for (int i = 0; i < sentence.length(); i++) {
-            if (sentence.substring(i, i+1).equals(" ")) { // TODO could use toCharArray for maximum effectiveness
+            if (sentence.substring(i, i+1).equals(" ")) {
+                blanks.add(i);
+            }
+        }
+        return blanks;
+    }
+
+    public ArrayList<Integer> getBlankPositionsButBetter()
+    {
+        ArrayList<Integer> blanks = new ArrayList<>();
+        char[] characters = sentence.toCharArray();
+        for (int i = 0; i < sentence.length(); i++) {
+            if (characters[i] == ' ') {
                 blanks.add(i);
             }
         }
