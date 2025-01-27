@@ -1,6 +1,5 @@
 package mandy.app;
 
-import static mandy.app.Result.*;
 
 public class Board {
 
