@@ -55,4 +55,22 @@ public class Board {
         }
         return printableBoard;
     }
+    // returns board with ships shown, a ship part is represented by an O if it is still intact and an X if it has already been hit
+    public String[] showShips() {
+        String[] baseBoard = getBoard();
+        StringBuilder builder = null;
+        for (Ship ship : ships) {
+            for (int i = 0; i < ship.getLocations().length; i++) {
+                builder = new StringBuilder(baseBoard[ship.getLocations()[i][0]]);
+                if (ship.getHit()[i]) {
+                    builder.setCharAt(2 * ship.getLocations()[i][1] + 1, 'X');
+                }
+                else {
+                    builder.setCharAt(2 * ship.getLocations()[i][1] + 1, 'O');
+                }
+                baseBoard[ship.getLocations()[i][0]] = builder.toString();
+            }
+        }
+        return baseBoard;
+    }
 }
