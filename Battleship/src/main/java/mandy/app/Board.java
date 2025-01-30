@@ -5,16 +5,16 @@ import java.util.Arrays;
 public class Board {
     private final String player;
     private final String[][] board;
-    private final Ship[] ships;
+    private Ship[] ships;
     // stores locations of ships
     // should be printed in a way that prints out only what you're supposed to see
-    public Board(String player, Ship[] ships) {
+    public Board(String player) {
         this.player = player;
         this.board = new String[10][10];
         for (String[] row : board) {
             Arrays.fill(row, "_");
         }
-        this.ships = ships;
+        this.ships = new Ship[5];
     }
     // shoots at location on board, returns a string that describes the result
     public String shoot(int[] coords) {
@@ -72,5 +72,19 @@ public class Board {
             }
         }
         return baseBoard;
+    }
+    // adds the ships (this allows printing of board with partial or no ships)
+    public void addShip(Ship ship) {
+        for (int i = 0; i < ships.length; i++) {
+            if (ships[i] == null) {
+                ships[i] = ship;
+                return;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException("no space for more ships");
+    }
+
+    public Ship[] getShips() {
+        return ships;
     }
 }

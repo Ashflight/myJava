@@ -8,7 +8,7 @@ public class Main {
         // Player One = You, Player Two = computer controlled.
         // computer player currently just randomly hits, no logic yet.
         Scanner scanner = new Scanner(System.in);
-        Board playerBoard = scanBoard(scanner);
+        Board playerBoard = new Board ("Player One");
 
     }
     private static void printBoard(String[] board) {
@@ -16,14 +16,13 @@ public class Main {
             System.out.println(row);
         }
     }
-    // user input reading
-    private static Board scanBoard(Scanner scanner) {
+    // user input reading to add ships
+    private static void scanShips(Scanner scanner, Board board) {
         System.out.println("You are Player One.");
         System.out.println("You will have a 10 by 10 board, with each spot marked by a vertical and horizontal coordinate.");
         System.out.println("Coordinates go from 0 to 9, top down, left to right.");
         System.out.println("You have 5 ships to place, in the following order:");
         System.out.println("A Carrier, 5 units long, a Battleship, 4 units long, a Submarine and a Destroyer, each 3 units long, and a Patrol Boat, 2 units long.");
-        Ship[] ships = new Ship[5];
         String[] shipNames = {"Carrier", "Battleship", "Submarine", "Destroyer", "Patrol Boat"};
         int[] shipSizes = {5, 4, 3, 3, 2};
         boolean placed = false;
@@ -45,15 +44,25 @@ public class Main {
                     System.out.println("You attempted to place the ship out of bounds, let's try placing it again.");
                     placed = true;
                 }
+                // this mess is to prevent ships from being placed overlapping
+                for (int[] location1 : ship.getLocations()) {
+                    for (Ship placedShip : board.getShips()){
+                        for (int[] location2 : placedShip.getLocations()) {
+                            if (location1[0] == location2[0] && location1[1] == location2[1]) {
+                                System.out.println("You attempted to place the ship on top of an already placed ship, let's try placing it again.");
+                                placed = true;
+                            }
+                        }
+                    }
+                }
                 placed = !placed;
             }
-            ships[i] = ship;
-        }        // try updating display with each ship placed to discourage placing ships on top of each other
-        // problem: cant print a board if you DONT HAVE ONE YET
+            board.addShip(ship);
+            printBoard(board.showShips());
+        }
         System.out.println("e");
         // TODO: Finish all of this user input + computer stuff
         // TODO: Might need to use Try/Except?
-        return new Board("Player One", ships);
     }
     // might make a computer class when I add logic for the computer.
 }
