@@ -1,6 +1,7 @@
 package mandy.app;
 
 import java.util.Scanner;
+import java.lang.Math.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,8 +9,27 @@ public class Main {
         // Player One = You, Player Two = computer controlled.
         // computer player currently just randomly hits, no logic yet.
         Scanner scanner = new Scanner(System.in);
-        Board playerBoard = new Board ("Player One");
-
+        Board playerBoard = new Board("Player One");
+        scanShips(scanner, playerBoard);
+        Board computerBoard = new Board("Player Two");
+        boolean playerTurn = true; // stores whether it is the player's turn or not
+        while (!playerBoard.checkLoss() && !computerBoard.checkLoss()) {
+            if (playerTurn) {
+                // get player input
+                // shoot opposing board
+                System.out.println(computerBoard.shoot(getCoords(scanner)));
+                // print opposing board
+                printBoard(computerBoard.getBoard());
+                playerTurn = false;
+            }
+            else {
+                // TODO: generate computer turn
+                // create random input
+                // shoot player's board
+                // print player's board
+                playerTurn = true;
+            }
+        }
     }
     private static void printBoard(String[] board) {
         for (String row : board) {
@@ -60,9 +80,59 @@ public class Main {
             board.addShip(ship);
             printBoard(board.showShips());
         }
-        System.out.println("e");
-        // TODO: Finish all of this user input + computer stuff
-        // TODO: Might need to use Try/Except?
+        System.out.println("You are ready to play.");
     }
+    // randomly generates ships for the computer
+    private static void randomizeShips(Board board) {
+        String[] shipNames = {"Carrier", "Battleship", "Submarine", "Destroyer", "Patrol Boat"};
+        int[] shipSizes = {5, 4, 3, 3, 2};
+        boolean placed = false;
+        Ship ship = null;
+        for (int i = 0; i < 5; i++) {
+            while (!placed) {
+                int yHead = (int) (10 * Math.random());
+                int xHead = (int) (10 * Math.random());
+                int hold = (int) (2 * Math.random());
+                String direction;
+                if (hold == 0) {
+                    direction = "V";
+                }
+                else {
+                    direction = "H";
+
+                }
+                try {
+                    ship = new Ship(shipNames[i], yHead, xHead, shipSizes[i], direction);
+                }
+                catch (IllegalArgumentException e) {
+                    placed = true;
+                }
+                // this mess is to prevent ships from being placed overlapping
+                for (int[] location1 : ship.getLocations()) {
+                    for (Ship placedShip : board.getShips()){
+                        for (int[] location2 : placedShip.getLocations()) {
+                            if (location1[0] == location2[0] && location1[1] == location2[1]) {
+                                placed = true;
+                            }
+                        }
+                    }
+                }
+                placed = !placed;
+            }
+            board.addShip(ship);
+        }
+        System.out.println("The game is ready to begin.");
+    }
+    // gets user inputted coordinates for shots
+    private static int[] getCoords(Scanner scanner) {
+        int[] coords = new int[2];
+        System.out.println("Please input a vertical coordinate for this shot: ");
+        coords[0] = scanner.nextInt();
+        System.out.println("Please input a horizontal coordinate for this shot: ");
+        coords[1] = scanner.nextInt();
+        return coords;
+    }
+    // TODO: Finish all of this user input + computer stuff
+    // TODO: write intelligent computer
     // might make a computer class when I add logic for the computer.
 }
