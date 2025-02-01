@@ -1,34 +1,57 @@
 package mandy.app;
 
 import java.util.Scanner;
-import java.lang.Math.*;
 
 public class Main {
     public static void main(String[] args) {
         // game loop
         // Player One = You, Player Two = computer controlled.
         // computer player currently just randomly hits, no logic yet.
+        // currently minimally functional
+        // TODO: find way to pause loop and have a small time delay between turns so the human player can think and react and scroll less
         Scanner scanner = new Scanner(System.in);
         Board playerBoard = new Board("Player One");
         scanShips(scanner, playerBoard);
         Board computerBoard = new Board("Player Two");
         boolean playerTurn = true; // stores whether it is the player's turn or not
+        System.out.println("You will play against a computer-controlled Player Two.");
+        Computer computer = new Computer();
+        computer.randomizeShips(computerBoard);
+        System.out.println("The game is ready to begin.");
         while (!playerBoard.checkLoss() && !computerBoard.checkLoss()) {
             if (playerTurn) {
                 // get player input
+                System.out.println("It is Player One's turn to shoot.");
+                int[] coords = getCoords(scanner);
+                System.out.println("Player One will shoot at V: " + coords[0] + " H: " + coords[1] + ".");
                 // shoot opposing board
-                System.out.println(computerBoard.shoot(getCoords(scanner)));
+                System.out.println(computerBoard.shoot(coords));
                 // print opposing board
+                System.out.println("Current status of Player Two's Board: ");
                 printBoard(computerBoard.getBoard());
                 playerTurn = false;
             }
             else {
                 // TODO: generate computer turn
                 // create random input
+                System.out.println("It is Player Two's turn to shoot.");
+                int[] coords = computer.getCoords();
+                System.out.println("Player Two will shoot at V: " + coords[0] + " H: " + coords[1] + ".");
                 // shoot player's board
+                System.out.println(playerBoard.shoot(coords));
                 // print player's board
+                System.out.println("Current status of Player One's Board: ");
+                printBoard(playerBoard.showShips());
                 playerTurn = true;
             }
+        }
+        if (playerBoard.checkLoss()) {
+            System.out.println("You lost.");
+            System.out.println("Your opponent's board: ");
+            printBoard(computerBoard.showShips());
+        }
+        else {
+            System.out.println("You win!");
         }
     }
     private static void printBoard(String[] board) {
@@ -54,6 +77,7 @@ public class Main {
                 int yHead = scanner.nextInt();
                 System.out.println("Enter a horizontal coordinate, where 0 would be the leftmost column and 9 would be the rightmost column: ");
                 int xHead = scanner.nextInt();
+                scanner.nextLine();
                 System.out.println("Enter V to place this ship vertically, with the tail down from the head.");
                 System.out.println("Enter H to place it horizontally, with the tail to the right of the head.");
                 String direction = scanner.nextLine();
@@ -65,12 +89,19 @@ public class Main {
                     placed = true;
                 }
                 // this mess is to prevent ships from being placed overlapping
+                if (ship == null) {
+                    break;
+                }
                 for (int[] location1 : ship.getLocations()) {
                     for (Ship placedShip : board.getShips()){
+                        if (placedShip == null) {
+                            break;
+                        }
                         for (int[] location2 : placedShip.getLocations()) {
                             if (location1[0] == location2[0] && location1[1] == location2[1]) {
                                 System.out.println("You attempted to place the ship on top of an already placed ship, let's try placing it again.");
                                 placed = true;
+                                break;
                             }
                         }
                     }
@@ -79,49 +110,9 @@ public class Main {
             }
             board.addShip(ship);
             printBoard(board.showShips());
+            placed = false;
         }
         System.out.println("You are ready to play.");
-    }
-    // randomly generates ships for the computer
-    private static void randomizeShips(Board board) {
-        String[] shipNames = {"Carrier", "Battleship", "Submarine", "Destroyer", "Patrol Boat"};
-        int[] shipSizes = {5, 4, 3, 3, 2};
-        boolean placed = false;
-        Ship ship = null;
-        for (int i = 0; i < 5; i++) {
-            while (!placed) {
-                int yHead = (int) (10 * Math.random());
-                int xHead = (int) (10 * Math.random());
-                int hold = (int) (2 * Math.random());
-                String direction;
-                if (hold == 0) {
-                    direction = "V";
-                }
-                else {
-                    direction = "H";
-
-                }
-                try {
-                    ship = new Ship(shipNames[i], yHead, xHead, shipSizes[i], direction);
-                }
-                catch (IllegalArgumentException e) {
-                    placed = true;
-                }
-                // this mess is to prevent ships from being placed overlapping
-                for (int[] location1 : ship.getLocations()) {
-                    for (Ship placedShip : board.getShips()){
-                        for (int[] location2 : placedShip.getLocations()) {
-                            if (location1[0] == location2[0] && location1[1] == location2[1]) {
-                                placed = true;
-                            }
-                        }
-                    }
-                }
-                placed = !placed;
-            }
-            board.addShip(ship);
-        }
-        System.out.println("The game is ready to begin.");
     }
     // gets user inputted coordinates for shots
     private static int[] getCoords(Scanner scanner) {
@@ -132,7 +123,5 @@ public class Main {
         coords[1] = scanner.nextInt();
         return coords;
     }
-    // TODO: Finish all of this user input + computer stuff
     // TODO: write intelligent computer
-    // might make a computer class when I add logic for the computer.
 }

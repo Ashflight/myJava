@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Board {
     private final String player;
     private final String[][] board;
-    private Ship[] ships;
+    private final Ship[] ships;
     // stores locations of ships
     // should be printed in a way that prints out only what you're supposed to see
     public Board(String player) {
@@ -23,7 +23,7 @@ public class Board {
             if (hit) {
                 board[coords[0]][coords[1]] = "H";
             }
-            if (ship.checkSink()) {
+            if (hit && ship.checkSink()) {
                 return (player + "'s " + ship.getName() + " has been hit, and it sank.");
             }
             else if (hit) {
@@ -31,7 +31,7 @@ public class Board {
             }
         }
         board[coords[0]][coords[1]] = "M";
-        return (player + " missed.");
+        return (player + " is safe.");
     }
     // returns true if all ships have sunk
     public boolean checkLoss() {
@@ -58,8 +58,11 @@ public class Board {
     // returns board with ships shown, a ship part is represented by an O if it is still intact and an X if it has already been hit
     public String[] showShips() {
         String[] baseBoard = getBoard();
-        StringBuilder builder = null;
+        StringBuilder builder;
         for (Ship ship : ships) {
+            if (ship == null) {
+                break;
+            }
             for (int i = 0; i < ship.getLocations().length; i++) {
                 builder = new StringBuilder(baseBoard[ship.getLocations()[i][0]]);
                 if (ship.getHit()[i]) {

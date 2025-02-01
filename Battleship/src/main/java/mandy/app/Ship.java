@@ -1,15 +1,15 @@
 package mandy.app;
 
 public class Ship {
-    private String name;
-    private int[][] locations;
-    private boolean[] hit;
+    private final String name;
+    private final int[][] locations;
+    private final boolean[] hit;
     // place ships by picking location of head and whether the ship should be vertical (down from head) or horizontal (right from head)
     // hit array marks which spots of the ship have been hit (default value of boolean is false)
     public Ship(String name, int yHead, int xHead, int size, String direction) {
         this.name = name;
         this.locations = new int[size][2];
-        if (direction == "V") {
+        if (direction.equals("V")) {
             for (int i = 0; i < size; i++) {
                 locations[i][0] = yHead + i;
                 locations[i][1] = xHead;
@@ -43,7 +43,7 @@ public class Ship {
     // return true if sank (all locations hit)
     public boolean checkSink() {
         for (boolean status : hit) {
-            if (status == false) {
+            if (!status) {
                 return false;
             }
         }
