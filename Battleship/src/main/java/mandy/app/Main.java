@@ -22,6 +22,8 @@ public class Main {
             if (playerTurn) {
                 // get player input
                 System.out.println("It is Player One's turn to shoot.");
+                System.out.println("This is the current status of Player Two's Board: ");
+                printBoard(computerBoard.getBoard());
                 int[] coords = getCoords(scanner);
                 System.out.println("Player One will shoot at V: " + coords[0] + " H: " + coords[1] + ".");
                 // shoot opposing board
@@ -43,6 +45,11 @@ public class Main {
                 System.out.println("Current status of Player One's Board: ");
                 printBoard(playerBoard.showShips());
                 playerTurn = true;
+            }
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
         if (playerBoard.checkLoss()) {
