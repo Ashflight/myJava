@@ -13,14 +13,27 @@ public class Main {
         // praying that the changes to implement a smart computer mode didnt break something
         Scanner scanner = new Scanner(System.in);
         Board playerBoard = new Board("Player One");
-        scanShips(scanner, playerBoard);
+        System.out.println("You are Player One.");
+        System.out.println("You will have a 10 by 10 board, with each spot marked by a vertical and horizontal coordinate.");
+        System.out.println("Coordinates go from 0 to 9, top down, left to right.");
+        System.out.println("You have 5 ships to place, in the following order:");
+        System.out.println("A Carrier, 5 units long, a Battleship, 4 units long, a Submarine and a Destroyer, each 3 units long, and a Patrol Boat, 2 units long.");
+        System.out.println("Do you wish to have your ships randomly placed for you? Reply with yes to do so.");
+        String reply = scanner.nextLine();
+        if (reply.equalsIgnoreCase("yes")) {
+            playerBoard.randomizeShips();
+            printBoard(playerBoard.showShips());
+        }
+        else {
+            scanShips(scanner, playerBoard);
+        }
         Board computerBoard = new Board("Player Two");
         boolean playerTurn = true; // stores whether it is the player's turn or not
         System.out.println("You will play against a computer-controlled Player Two.");
         Computer computer;
         boolean smartComputerActive = false; // intellij says i need this even though boolean default value is false
         System.out.println("Do you wish to turn on \"Smart Computer\" mode? Reply with yes to do so.");
-        String reply = scanner.nextLine();
+        reply = scanner.nextLine();
         if (reply.equalsIgnoreCase("yes")) {
             smartComputerActive = true;
             computer = new SmartComputer();
@@ -28,7 +41,7 @@ public class Main {
         else {
             computer = new Computer();
         }
-        computer.randomizeShips(computerBoard);
+        computerBoard.randomizeShips();
         System.out.println("The game is ready to begin.");
         while (!playerBoard.checkLoss() && !computerBoard.checkLoss()) {
             if (playerTurn) {
@@ -85,11 +98,6 @@ public class Main {
     }
     // user input reading to add ships
     private static void scanShips(Scanner scanner, Board board) {
-        System.out.println("You are Player One.");
-        System.out.println("You will have a 10 by 10 board, with each spot marked by a vertical and horizontal coordinate.");
-        System.out.println("Coordinates go from 0 to 9, top down, left to right.");
-        System.out.println("You have 5 ships to place, in the following order:");
-        System.out.println("A Carrier, 5 units long, a Battleship, 4 units long, a Submarine and a Destroyer, each 3 units long, and a Patrol Boat, 2 units long.");
         String[] shipNames = {"Carrier", "Battleship", "Submarine", "Destroyer", "Patrol Boat"};
         int[] shipSizes = {5, 4, 3, 3, 2};
         boolean placed = false;
