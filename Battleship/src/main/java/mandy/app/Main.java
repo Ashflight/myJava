@@ -151,8 +151,16 @@ public class Main {
         int[] coords = new int[2];
         System.out.println("Please input a vertical coordinate for this shot: ");
         coords[0] = scanner.nextInt();
+        while (0 > coords[0] || coords[0] > 9) {
+            System.out.println("You inputted a value out of bounds. Please retry: ");
+            coords[0] = scanner.nextInt();
+        }
         System.out.println("Please input a horizontal coordinate for this shot: ");
         coords[1] = scanner.nextInt();
+        while (0 > coords[1] || coords[1] > 9) {
+            System.out.println("You inputted a value out of bounds. Please retry: ");
+            coords[1] = scanner.nextInt();
+        }
         return coords;
     }
 }

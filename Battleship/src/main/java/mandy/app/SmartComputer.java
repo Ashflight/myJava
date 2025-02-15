@@ -18,14 +18,21 @@ public class SmartComputer extends Computer {
     @Override
     public int[] getCoords() {
         if (targeting) {
+            super.removeCoord(target);
             return target;
         }
-        int y = 2 * (int) (5 * Math.random());
+        int y = (int) (10 * Math.random());
         int x = 2 * (int) (5 * Math.random());
+        if (y % 2 == 1) {
+            x++;
+        }
         // optimal guessing strategy for when not targeting is to guess in a checkerboard fashion
         while (super.getCoordbank()[y][x]) {
-            y = 2 * (int) (5 * Math.random());
+            y = (int) (10 * Math.random());
             x = 2 * (int) (5 * Math.random());
+            if (y % 2 == 1) {
+                x++;
+            }
         }
         super.removeCoord(y, x);
         return new int[]{y, x};
@@ -40,6 +47,8 @@ public class SmartComputer extends Computer {
             targetDirection = -1;
             return;
         }
+        // targeting system may currently attempt to shoot at places that have already been fired at
+        // target creating needs more extensive validating before setting target.
         if (message.contains("hit") && !targeting) { // finds a target
             // turn on targeting
             targeting = true;
@@ -48,7 +57,15 @@ public class SmartComputer extends Computer {
             // test a random direction
             aimDirection = (int) (4 * Math.random());
             // sets up next shot via target variable
-            target = makeTarget(targetStart, aimDirection);
+            try { // ok so this needs some work technically a space can be at most against 2 out of bound regions by being in a corner
+                target = makeTarget(targetStart, aimDirection);
+            } catch (IndexOutOfBoundsException e) {
+                checkedDirections[aimDirection] = true;
+                while (checkedDirections[aimDirection]) {
+                    aimDirection = (int) (4 * Math.random());
+                }
+                target = makeTarget(targetStart, aimDirection);
+            }
             return;
         }
         if (message.contains("hit")) { // for when targeting is active and a hit has occurred
@@ -105,6 +122,9 @@ public class SmartComputer extends Computer {
         else {
             out[0] = in[0];
             out[1] = in[1] + 1;
+        }
+        if (out[0] > 9 || out[1] > 9 || out[0] < 0 || out[1] < 0) {
+            throw new IndexOutOfBoundsException();
         }
         return out;
     }
