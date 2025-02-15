@@ -9,7 +9,9 @@ public class Main {
         // DIRECTORY:
         // Searches and Sorts were written to review searching and sorting algorithms.
         // FourDigitInteger, Cruise, Sentence, and Matrix + ArrayUtil are from Barron's Diagnostic Test.
-        sortSearchSpam();
+        // Note + NoteKeeper are from Barron's Practice Test 2
+        runNote();
+        //sortSearchSpam();
     }
 
     public static void sortSearchSpam() {
@@ -31,5 +33,21 @@ public class Main {
         System.out.println(Sorts.insertionSort(randomNumbers));
         System.out.println(Sorts.mergeSort(randomNumbers));
         System.out.println(Sorts.quickSort(randomNumbers));
+    }
+
+    public static void runNote() {
+        NoteKeeper n = new NoteKeeper();
+        n.addNote("pick up dry cleaning");
+        n.addNote("special dog chow");
+        n.addNote("car registration");
+        n.addNote("dentist monday");
+        n.addNote("dog license");
+        n.addNote("buy carrots");
+        n.addNote("carpet cleaning");
+        n.addNote("pick up car");
+        n.printNotes();
+        n.removeNotes("car");
+        System.out.println("Notes with car removed");
+        n.printNotes();
     }
 }

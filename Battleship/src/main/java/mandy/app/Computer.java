@@ -51,6 +51,7 @@ public class Computer { // rather unintelligent computer opponent that randomly 
                             for (int[] location2 : placedShip.getLocations()) {
                                 if (location1[0] == location2[0] && location1[1] == location2[1]) {
                                     placed = true;
+                                    break;
                                 }
                             }
                         }
@@ -61,4 +62,17 @@ public class Computer { // rather unintelligent computer opponent that randomly 
             board.addShip(ship);
             placed = false;
         }
-    }}
+    }
+
+    public boolean[][] getCoordbank() {
+        return coordbank;
+    }
+
+    public void removeCoord(int[] coords) {
+        coordbank[coords[0]][coords[1]] = true;
+    }
+
+    public void removeCoord(int y, int x) {
+        coordbank[y][x] = true;
+    }
+}
