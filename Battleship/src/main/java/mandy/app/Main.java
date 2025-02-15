@@ -6,16 +6,28 @@ public class Main {
     public static void main(String[] args) {
         // game loop
         // Player One = You, Player Two = computer controlled.
-        // computer player currently just randomly hits, no logic yet.
-        // currently minimally functional
-        // TODO: find way to pause loop and have a small time delay between turns so the human player can think and react and scroll less
+        // "smart computer" currently completely untested
+        // i think it's still minimally functional
+        // i hope it is
+        // random/base/stupid computer version definitely works
+        // praying that the changes to implement a smart computer mode didnt break something
         Scanner scanner = new Scanner(System.in);
         Board playerBoard = new Board("Player One");
         scanShips(scanner, playerBoard);
         Board computerBoard = new Board("Player Two");
         boolean playerTurn = true; // stores whether it is the player's turn or not
         System.out.println("You will play against a computer-controlled Player Two.");
-        Computer computer = new Computer();
+        Computer computer;
+        boolean smartComputerActive = false; // intellij says i need this even though boolean default value is false
+        System.out.println("Do you wish to turn on \"Smart Computer\" mode? Reply with yes to do so.");
+        String reply = scanner.nextLine();
+        if (reply.equalsIgnoreCase("yes")) {
+            smartComputerActive = true;
+            computer = new SmartComputer();
+        }
+        else {
+            computer = new Computer();
+        }
         computer.randomizeShips(computerBoard);
         System.out.println("The game is ready to begin.");
         while (!playerBoard.checkLoss() && !computerBoard.checkLoss()) {
@@ -34,13 +46,18 @@ public class Main {
                 playerTurn = false;
             }
             else {
-                // TODO: generate computer turn
                 // create random input
                 System.out.println("It is Player Two's turn to shoot.");
                 int[] coords = computer.getCoords();
                 System.out.println("Player Two will shoot at V: " + coords[0] + " H: " + coords[1] + ".");
                 // shoot player's board
-                System.out.println(playerBoard.shoot(coords));
+                String message = playerBoard.shoot(coords);
+                System.out.println(message);
+                // smart computer tries to manage targeting
+                if (smartComputerActive) {
+                    SmartComputer refFixedComputer = (SmartComputer) computer;
+                    refFixedComputer.checkTargeting(coords, message);
+                }
                 // print player's board
                 System.out.println("Current status of Player One's Board: ");
                 printBoard(playerBoard.showShips());
@@ -130,5 +147,4 @@ public class Main {
         coords[1] = scanner.nextInt();
         return coords;
     }
-    // TODO: write intelligent computer
 }
