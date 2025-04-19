@@ -10,8 +10,11 @@ public class Main {
         // Searches and Sorts were written to review searching and sorting algorithms.
         // FourDigitInteger, Cruise, Sentence, and Matrix + ArrayUtil are from Barron's Diagnostic Test.
         // Note + NoteKeeper are from Barron's Practice Test 2
-        runNote();
+        // mystery24 is the mystery method from MCQ #24 of Princeton's Practice Test 2
+
         //sortSearchSpam();
+        runNote();
+        mystery24();
     }
 
     public static void sortSearchSpam() {
@@ -49,5 +52,24 @@ public class Main {
         n.removeNotes("car");
         System.out.println("Notes with car removed");
         n.printNotes();
+    }
+
+    public static void mystery24() {
+        int[] A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+        System.out.println(Arrays.toString(A));
+
+        // main loop from question
+        for (int k = 0; k < A.length / 2; k++) {
+            swap(A[k], A[A.length - k - 1]);
+        }
+        System.out.println(Arrays.toString(A));
+        // does nothing. as expected.
+    }
+
+    public static void swap(int x, int y) {
+        int temp;
+        temp = x;
+        x = y;
+        y = temp;
     }
 }
