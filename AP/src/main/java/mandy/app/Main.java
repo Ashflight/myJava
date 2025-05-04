@@ -11,10 +11,13 @@ public class Main {
         // FourDigitInteger, Cruise, Sentence, and Matrix + ArrayUtil are from Barron's Diagnostic Test.
         // Note + NoteKeeper are from Barron's Practice Test 2
         // mystery24 is the mystery method from MCQ #24 of Princeton's Practice Test 2
+        // Bird and Dove are from Barron's (in-book) Diagnostic Test MCQ #39
 
-        //sortSearchSpam();
-        runNote();
-        mystery24();
+        // sortSearchSpam();
+        // runNote();
+        // mystery24();
+        Bird pigeon = new Dove();
+        pigeon.act();
     }
 
     public static void sortSearchSpam() {
